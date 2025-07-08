@@ -1,0 +1,14 @@
+<div class="container-fluid g-0">
+  
+ <app-navbar (sideNavToggled)="sideNavStatus = $event;"></app-navbar> 
+ <main>
+
+   <app-sidebar2 [sideNavStatus]="sideNavStatus"></app-sidebar2>
+
+
+    <div class="display-area p-3 ">
+      <router-outlet></router-outlet>
+       
+    </div> 
+ </main>
+</div>

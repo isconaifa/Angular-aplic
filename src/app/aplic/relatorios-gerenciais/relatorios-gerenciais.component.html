@@ -1,0 +1,115 @@
+<div class="card flex justify-center w-100">
+  <p-fieldset legend="Relatórios Gerenciais" class="w-100">
+    <p>Selecione os parâmetros de consulta e clique em visualizar</p>
+
+    <div class="flex flex-row gap-7 ">
+      <p-fieldset legend="Exercício:">
+        <div class="card flex justify-center">
+          <p-select [options]="selectListAno" [(ngModel)]="ExercicioSelecionado" optionLabel=anoNum
+            placeholder="Exercício" [ngModelOptions]="{standalone: true}" class="w-full md:w-56" />
+
+        </div>
+
+      </p-fieldset>
+
+      <p-fieldset legend="Competência:">
+
+        <div class="card flex justify-center">
+          <p-select [options]="Competencias" [(ngModel)]="CompetenciaSelecionada" optionLabel="mes"
+            placeholder="Competência" [ngModelOptions]="{standalone: true}" class="w-full md:w-56" />
+        </div>
+
+      </p-fieldset>
+      <p-fieldset legend="Tipo de Carga:">
+        <div class="card flex justify-center">
+          <p-select [options]="TipoCargas" [(ngModel)]="TipoCargaSelecionada" optionLabel="name"
+            placeholder="Tipo de Carga" [ngModelOptions]="{standalone: true}" class="w-full md:w-56" />
+
+        </div>
+      </p-fieldset>
+    </div>
+
+    <div>
+      <form>
+        <p-fieldset legend="Selecione o Conselheiro:">
+          <div class="card flex justify-center">
+            <p-select [options]="conselheiros" [(ngModel)]="conselheiroSelecionado" optionLabel="name"
+              placeholder="Conselheiro" [ngModelOptions]="{standalone: true}" class="w-full md:w-56" />
+          </div>
+        </p-fieldset>
+
+
+        <p-fieldset legend="Selecione o Município:">
+          <div class="card flex justify-center">
+            <p-select [options]="municipios" [(ngModel)]="municipioSelecionado" [ngModelOptions]="{standalone: true}"
+              optionLabel="name" placeholder="Município" class="w-full md:w-56" />
+          </div>
+        </p-fieldset>
+
+        <p-fieldset legend="Selecione a unidade Gestora:">
+
+        </p-fieldset>
+
+        <p-panel class="w-full flex flex-col gap-4 mt-2">
+          <div class="card flex justify-center w-full">
+            <div class="flex flex-col gap-4 w-full">
+              <div class="flex items-center">
+                <p-radiobutton name="ugs" value="toda" [(ngModel)]="ugs" inputId="todaUgs" />
+                <label for="todaUgs" class="ml-2">Todas as UGs</label>
+              </div>
+
+              <div class="flex items-center">
+                <p-radiobutton name="prefeituras" value="prefeituras" [(ngModel)]="ugs" inputId="prefeituras" />
+                <label for="somentePrefeituras" class="ml-2">Somente Prefeituras</label>
+              </div>
+
+              <div class="flex items-center">
+                <p-radiobutton name="cameras" value="cameras" [(ngModel)]="ugs" inputId="cameras" />
+                <label for="somentecameras" class="ml-2">Somente Câmaras</label>
+              </div>
+            </div>
+          </div>
+        </p-panel>
+
+
+        <p-fieldset class="w-full flex flex-col gap-4 mt-2" legend="Selecione o tipo de Relatório:">
+          <div class="card flex justify-center w-full">
+            <div class="flex flex-col gap-4 w-full">
+              <div class="flex items-center">
+                <p-radiobutton name="ControleInterno" value="ControleInterno" [(ngModel)]="tipoRelatorio"
+                  inputId="ControleInterno" />
+                <label for="ControleInterno" class="ml-2">Controle Interno</label>
+              </div>
+
+              <div class="flex items-center">
+                <p-radiobutton name="historicoEnvioAplic" value="historicoEnvioAplic" [(ngModel)]="tipoRelatorio"
+                  inputId="historicoEnvioAplic" />
+                <label for="historicoEnvioAplic" class="ml-2">Histórico de envios do APLIC (analítico)</label>
+              </div>
+
+              <div class="flex items-center">
+                <p-radiobutton name="historicoEnvioAplicSintetico" value="historicoEnvioAplicSintetico"
+                  [(ngModel)]="tipoRelatorio" inputId="historicoEnvioAplicSintetico" />
+                <label for="historicoEnvioAplicSintetico" class="ml-2">Histórico de envios do APLIC (sintético)</label>
+              </div>
+
+              <div class="flex items-center">
+                <p-radiobutton name="prestacaoContaAplic" value="prestacaoContaAplic" [(ngModel)]="tipoRelatorio"
+                  inputId="prestacaoContaAplic" />
+                <label for="prestacaoContaAplic" class="ml-2">Prestação de contas de APLIC</label>
+              </div>
+            </div>
+          </div>
+        </p-fieldset>
+
+      <p-panel>
+    <div class="card flex flex-wrap gap-4 justify-center">
+    <p-button  label="Visualizar" variant="text" [raised]="true" severity="primary" />
+    <p-button  label="Voltar" variant="text" [raised]="true" severity="info" />
+
+    </div>
+      </p-panel>
+      </form>
+
+    </div>
+

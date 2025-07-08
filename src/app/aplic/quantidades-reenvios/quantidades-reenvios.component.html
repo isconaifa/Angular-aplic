@@ -1,0 +1,95 @@
+<div class="d-flex" style="width: 100%;">
+<div class="flex-shrink-0" style="flex: 0 0 90%; max-width: 90%;">
+    <div class="p-3 fw-bold">
+        <h1>Consulta da Quantidade de Reenvios por Unidade Gestora</h1>
+        <h6 class="fw-bold">Clique com o botão do mouse sobre a tabela para mais opções</h6>
+    </div>
+   
+    <p-panel header="Resultado(s) da consulta">
+     
+       <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Municipio</th>
+      <th scope="col">UG</th>
+      <th scope="col">Orçamento</th>
+      <th scope="col">Carga inicial</th>
+      <th scope="col">Jan</th>
+      <th scope="col">Fev</th>
+      <th scope="col">Mar</th>
+      <th scope="col">Abr</th>
+      <th scope="col">Mai</th>
+      <th scope="col">Jun</th>
+      <th scope="col">Jul</th>
+      <th scope="col">Ago</th>
+      <th scope="col">Set</th>
+      <th scope="col">Out</th>
+      <th scope="col">Nov</th>
+      <th scope="col">Dez</th>
+      <th scope="col">Enc</th>
+      <th scope="col">Total</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Cuiabá</th>
+      <td>test</td>
+      <td>84</td>
+      <td>565</td>
+      <td>45</td>
+      <td>45</td>
+      <td>4</td>
+      <td>124</td>
+      <td>454</td>
+      <td>89</td>
+      <td>8</td>
+      <td>89</td>
+      <td>565</td>
+      <td>13</td>
+      <td>34</td>
+      <td>47</td>
+      <td>14</td>
+      <td>98</td>
+    </tr>
+  </tbody>
+</table>
+    </p-panel>
+</div>
+
+
+<div class="flex-shrink-0" style="flex: 1 1 10%; max-width: 10%;">
+<div class="card flex justify-center m-1 text-small">
+   <p-fieldset legend="opções:" class="font-small">
+    Selecione o Exercício
+        <div class="card flex justify-center">
+          <p-select [options]="selectListAno" [(ngModel)]="ExercicioSelecionado" optionLabel=anoNum
+            placeholder="Exercício" [ngModelOptions]="{standalone: true}"  class="w-100 md:w-56" />
+
+        </div>
+      </p-fieldset>
+</div>
+
+<div class="card flex flex-wrap gap-4 justify-center m-2">
+    <p-button label="Ir para a unidade gestora" variant="text" severity="secondary" />
+   
+</div>
+
+<div class="card flex flex-wrap gap-4 justify-center m-2 text-small">
+    <p-message severity="error">Obs: estão sendo considerados apenas os reenvios autorizados e reenviados após 31/05/2011</p-message>
+
+</div>
+
+<div class="card flex flex-wrap gap-4 justify-center m-2">
+    <p-button label="Filtrar[F3]" variant="outlined" severity="secondary" />
+</div>
+
+<div class="card flex flex-wrap gap-4 justify-center m-2">
+  <p-button label="Localizar[F4]" variant="outlined" severity="secondary" />
+</div>
+
+<div class="card flex flex-wrap gap-4 justify-center m-2">
+  <p-button label="Fechar[Esc]" variant="outlined" severity="secondary" />
+</div>
+</div>
+</div>

@@ -1,0 +1,134 @@
+<nav class="navbar navbar-expand px-2">
+<div class="side-nav-button p-2 me-2 text-light" (click)="SideNavBar()">
+   <img class="" src="aplic-tcemt-logo.svg" alt="logo de aplic" width="50px" height="50px">
+</div>
+
+<a class="navbar-brand px-4 text-light" href="#">APLIC</a>
+
+<div class="navbar-collapse">
+    <ul class="navbar-nav me-auto">
+
+     <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+       Peças de Planejamento
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+       Prestação de Contas
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+       Informes: Mensais
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+       Informes: Envio Imediato
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+       Auditoria
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+      Impressões
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+       Cruzamento de Dados
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="" role="button"
+    data-bs-toggle="dropdown">
+       Ajuda
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="">Child 1</a></li>
+      <li><a class="dropdown-item" href=""> Child 2</a></li>
+      <li><a class="dropdown-item" href=""> Child 3</a></li>
+    </ul>
+     </li>
+
+    </ul>
+</div>
+
+<form class="d-flex me-5">
+ <input class="form-control me-2" type="search" placeholder="Pesquisar">
+ <button class="btn btn-outline-light" type="submit">Pesquisar</button>
+</form>
+
+  <div class="profile-logo dropstart">
+ <button class="btn btn-outline-light dropdown-toggle"  data-bs-toggle="dropdown">
+    Naifa
+ </button>
+ <ul class="dropdown-menu dropdown-menu-dark">
+   <li *ngFor="let item of list">
+    <a href="" class="dropdown-item" routerLink="active" [routerLink]="[item.route]">{{item.name}}</a>
+  </li>
+   
+ </ul>
+  </div>
+</nav>
