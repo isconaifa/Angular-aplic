@@ -12,3 +12,10 @@ btn btn-custom{
     background-color: var(--orange);
 }
 
+.text-small{
+    font-size: 0.7rem;
+}
+
+.p-fieldset-legend{
+    font-size: 0.8rem;
+}

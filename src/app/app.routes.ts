@@ -34,6 +34,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./aplic/quantidades-reenvios/quantidades-reenvios.component')
             },
             {
+                path: 'unidade-gestora',
+                loadComponent: () => import('./aplic/unidade-gestora/unidade-gestora.component')
+            }, 
+            {
                 path: 'sugestoes',
                 loadComponent: () => import('./aplic/sugestoes/sugestoes.component')
 

@@ -11,7 +11,7 @@
               </div>
              
              <div>
-             <p-button label="Resumo" variant="outlined" severity="info" />
+             <p-button label="Resumo" variant="outlined" severity="info"  />
              </div>
         </div>
 
@@ -74,7 +74,7 @@
 
 <div class="flex-shrink-0" style="flex: 1 1 10%; max-width: 10%;">
 <div class="card flex justify-center m-1 text-small">
-   <p-fieldset legend="opções:" class="font-small">
+   <p-fieldset legend="opções:" class="text-small">
     Selecione o Exercício
         <div class="card flex justify-center">
           <p-select [options]="selectListAno" [(ngModel)]="ExercicioSelecionado" optionLabel=anoNum
@@ -85,7 +85,7 @@
 </div>
 
 <div class="card flex justify-center m-1">
-    <p-fieldset legend="Esfera:">
+    <p-fieldset legend="Esfera:" class="text-small">
         <div *ngFor="let category of categories" class="field-checkbox">
             <p-radiobutton [inputId]="category.key" name="category" [value]="category" [(ngModel)]="selectedCategory" />
             <label [for]="category.key" class="ml-2">{{ category.name }}</label>
@@ -94,9 +94,9 @@
 </div>
 
 
-<div class="card flex justify-center m-1">
-    <p-fieldset legend="Carga:">
-        <div *ngFor="let carga of cargas" class="field-checkbox text-small">
+<div class="card flex justify-center m-1 text-small">
+    <p-fieldset legend="Carga:" class="text-small">
+        <div *ngFor="let carga of cargas" class="field-checkbox text-small m-1">
             <p-radiobutton [inputId]="carga.key" name="carga" [value]="carga" [(ngModel)]="selecioneCarga" />
             <label [for]="carga.key" class="ml-2">{{ carga.name }}</label>
 
