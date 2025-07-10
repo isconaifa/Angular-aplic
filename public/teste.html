@@ -1,14 +1,18 @@
-<div class="d-flex w-100">
-     <div class="p-3 w-100">
+<div class="container-fluid d-flex">
+
+
+
+<div class="d-flex" style="width: 100%;">
+     <div class="p-3">
         <h1 class="text-secondary">Selecionar a Unidade Gestora para Auditoria</h1>
         <h6 class="fw-bold text-danger">Atenção para o exercício da relatoria</h6>
            <div class="border p-3 w-100">
   <div class="d-flex" style="gap: 10px;"> <!-- Container flex -->
-  <div class="d-flex flex-column gap-5 ">
+  <div class="d-flex flex-column gap-5 " style="width: 30%;">
     <button type="button" class="btn btn-outline-secondary py-3">Selecionar</button>
     <button type="button" class="btn btn-outline-danger py-3">Fechar</button>
   </div>
-  <div class="d-flex flex-column w-100 bg-gray">
+  <div class="d-flex flex-column w-100 bg-gray" style="width: 100%;">
   <h3 class="font-weight-bold text-secondary">Conselheiro da UG Selecionada: <strong>xxxxx</strong></h3>
 
   <!-- Disposição para o select -->
@@ -43,11 +47,13 @@
   </div>
 </div>
  </div>
-<div class="container-fluid d-flex">
-  
-      <!-- PARTE ESQUERDA DA PÁGINA -->
-  <div class="left-part bg-gray ">
-     <p-fieldset legend="Exercício para análise">
+
+
+     
+       
+    <div class="flex-shrink-0" style="flex: 0 0 11%; max-width: 11%;">
+     <!-- A parte direito com 11 de width -->
+    <p-fieldset legend="Exercício para análise">
      <div class="d-flex w-100 justify-center ">
           <p-select [options]="selectListAno" [(ngModel)]="ExercicioSelecionado" optionLabel=anoNum
             placeholder="Exercício" [ngModelOptions]="{standalone: true}" class="w-full md:w-56" />
@@ -57,9 +63,9 @@
       <p-panel>
      <p-fieldset legend="Informações recebidas" class="m-2">
      <div class="d-flex w-100 flex-column">
-      <div *ngFor="let informacao of InfoRecebidas" class="flex flex-column">
-            <p-checkbox [inputId]="informacao.key" name="group" [value]="informacao" [(ngModel)]="infoRecebidaSelecionadas" />
-            <label [for]="informacao.key" class="ml-2"> {{ informacao.name }} </label>
+      <div *ngFor="let category of categories" class="flex flex-column">
+            <p-checkbox [inputId]="category.key" name="group" [value]="category" [(ngModel)]="selectedCategories" />
+            <label [for]="category.key" class="ml-2"> {{ category.name }} </label>
       </div> 
 
       </div>
@@ -73,7 +79,7 @@
 
       </p-fieldset>
 
-      <p-fieldset class="m-2">
+      <p-fieldset legend="Informações recebidas" class="m-2">
      <div class="d-flex w-100 flex-column">
      
       <div *ngFor="let category of categories" class="flex flex-column">
@@ -84,47 +90,18 @@
       </div>
      </p-fieldset>
 
-     <p-fieldset legend="ENVIO IMEDIATO:">
-      <P>Licitações: <strong>00</strong></P>
-      <P>Concursos: <strong>00</strong></P>
-      <P>Benefícios: <strong>00</strong></P>
-     </p-fieldset>
-
-
-     <p-fieldset legend="Modo de Trabalho" class="m-2">
-      <!-- Aqui vai o modo de trabalho -->
-       <div *ngFor="let mod of modos" class="field-checkbox">
-            <p-radiobutton [inputId]="mod.key" name="mod" [value]="mod" [(ngModel)]="modoSelecionado" />
-            <label [for]="mod.key" class="ml-2">{{ mod.name }}</label>
-        </div>
-     </p-fieldset>
-
    </p-panel>
-    
-  </div>
+    </div>
 
-  <!-- PARTE DIREITA DA PÁGINA -->
-  <div class="right-part bg-gray ">
-   
-    <p-panel class="mr-4">
-      
-    <!-- Municípios -->
-    <div class=" w-20 m-2">
-     <p-panel header="Municípios">
-          <div class="card flex justify-center">
-            <p-select [options]="municipios" [(ngModel)]="municipioSelecionado" [ngModelOptions]="{standalone: true}"
-              optionLabel="name" placeholder="Município" class="w-full md:w-56" />
-          </div>
-    </p-panel>
-   </div>
+  <div class="d-flex flex-row gap-3">
+          
+  
+<div class="flex-shrink-0" style="flex: 1 1 89%; max-width: 89%;">
 
-    <!-- Unidades Gestoras -->
-   <div class="w-20 m-2">
-     <p-panel header="Unidades Gestoras que enviaram informações">
+       <!-- A parte direita com 89 de width -->
 
-    </p-panel>
-   </div>
-    </p-panel>
-    
-  </div>
 </div>
+
+</div>
+
+

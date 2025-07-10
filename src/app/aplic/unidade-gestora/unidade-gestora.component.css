@@ -1,5 +1,18 @@
 .new-line {
   display: block;
   width: 100%;
-  margin-top: 10px; /* ou qualquer espaçamento desejado */
+  margin-top: 10px; 
 }
+
+p-select {
+   font-size: 0.7rem;
+}
+
+.left-part {
+  flex: 0 0 11%;
+}
+
+.right-part {
+  flex: 0 0 89%; 
+}
+

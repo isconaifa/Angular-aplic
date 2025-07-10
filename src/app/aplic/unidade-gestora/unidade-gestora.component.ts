@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { Message } from 'primeng/message';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
@@ -8,11 +7,23 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectListAno } from '../../models/SelectListAno';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common';
+import { Panel } from "primeng/panel";
+import { RadioButton } from 'primeng/radiobutton';
+
+
 
 
 interface municipio {
   name: string;
 }
+interface TipoCarga {
+  name: string;
+}
+
+interface municipio {
+  name: string;
+}
+
 
 interface selecionartipo {
   name: string;
@@ -20,16 +31,17 @@ interface selecionartipo {
 @Component({
   selector: 'app-unidade-gestora',
   imports: [
-     ButtonModule,
-     FieldsetModule,
-     Message,
-     SelectModule,
-     SelectModule,
-     FormsModule,
-     InputTextModule,
-     CheckboxModule,
-     CommonModule
-  ],
+    ButtonModule,
+    FieldsetModule,
+    SelectModule,
+    SelectModule,
+    FormsModule,
+    InputTextModule,
+    CheckboxModule,
+    CommonModule,
+    Panel,
+    RadioButton
+],
   templateUrl: './unidade-gestora.component.html',
   styleUrl: './unidade-gestora.component.css'
 })
@@ -37,34 +49,54 @@ export default class UnidadeGestoraComponent implements OnInit {
   municipios: municipio[] | undefined;
   municipioSelecionado: municipio | undefined;
 
-  
+
   public selectListAno: SelectListAno[] = [];
   ExercicioSelecionado: SelectListAno | undefined;
 
   selecionarTipos: selecionartipo[] | undefined;
   selecionarTiposSelecionado: selecionartipo | undefined;
-  
+
   value: string | undefined;
 
-  selectedCategories: any[] = [];
- 
-   categories: any[] = [
-        { name: 'Jan', key: 'J' },
-        { name: 'Fev', key: 'F' },
-        { name: 'Mar', key: 'M' },
-        { name: 'Abr', key: 'A' },
-        { name: 'Mai', key: 'M' },
-        { name: 'Jun', key: 'J' },
-        { name: 'Jul', key: 'J' },
-        { name: 'Ago', key: 'A' },
-        { name: 'Set', key: 'S' },
-        { name: 'Out', key: 'O' },
-        { name: 'Nov', key: 'N' },
-        { name: 'Dez', key: 'D' },
+  TipoCargas: TipoCarga[] | undefined;
+  TipoCargaSelecionada: TipoCarga | undefined;
+
+  infoRecebidaSelecionadas: any[] = [];
+
+  InfoRecebidas: any[] = [
+    { name: 'Orçamento', key: 'O' },
+    { name: 'Carga Inicial', key: 'I' },
+    { name: 'Encerramento', key: 'E' },
+  ];
+
+  modoSelecionado: any = null;
+  modos: any[] = [
+        { name: 'MUNCIPICAL', key: 'M' },
+        { name: 'ESTADUAL', key: 'E' },
     ];
-getIndexOfJuly(): number {
-  return this.categories.findIndex(cat => cat.name === 'Jul');
-}
+  
+
+  selectedCategories: any[] = [];
+
+  categories: any[] = [
+    { name: 'Jan', key: 'J' },
+    { name: 'Fev', key: 'F' },
+    { name: 'Mar', key: 'M' },
+    { name: 'Abr', key: 'A' },
+    { name: 'Mai', key: 'M' },
+    { name: 'Jun', key: 'J' },
+    { name: 'Jul', key: 'J' },
+    { name: 'Ago', key: 'A' },
+    { name: 'Set', key: 'S' },
+    { name: 'Out', key: 'O' },
+    { name: 'Nov', key: 'N' },
+    { name: 'Dez', key: 'D' },
+  ];
+
+
+  // Exemplo de divisão em grupos de 6
+
+
   public populaSelectListAno(): SelectListAno[] {
     const anoAtual = new Date().getFullYear();
     const arrayAno: SelectListAno[] = [];
@@ -225,14 +257,22 @@ getIndexOfJuly(): number {
       { name: 'VILA RICA' },
 
     ];
-    this.selecionarTipos=[
+    this.selecionarTipos = [
       { name: 'MUNICIPIO' },
       { name: 'UNIDADE JULGADORA' },
       { name: 'TIPO UNIDADE GESTORA' },
       { name: 'CONSELHEIRO' },
     ];
-     this.selectListAno = this.populaSelectListAno();
-     this.selectedCategories = [this.categories[0]];
-      
+    this.selectListAno = this.populaSelectListAno();
+    this.selectedCategories = [this.categories[0]];
+    this.infoRecebidaSelecionadas = [this.InfoRecebidas[0]];
+    this.modoSelecionado = this.modos[0];
+
+    this.TipoCargas = [
+      { name: 'Contabilidade' },
+      { name: 'Folha de Pagamento' },
+      { name: 'Contratos' },
+      { name: 'Patrimônio' },
+    ];
   }
 }

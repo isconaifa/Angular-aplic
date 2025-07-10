@@ -38,7 +38,7 @@ interface Competencia {
 
 @Component({
   selector: 'app-relatorios-gerenciais',
-  imports: [ FieldsetModule, FormsModule, SelectModule, RadioButton, PanelModule, ButtonModule],
+  imports: [ FieldsetModule, FormsModule, SelectModule, RadioButton, PanelModule, ButtonModule, RelatoriosGerenciaisComponent],
   templateUrl: './relatorios-gerenciais.component.html',
   styleUrl: './relatorios-gerenciais.component.css'
 })
