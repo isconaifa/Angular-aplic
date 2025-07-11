@@ -15,3 +15,37 @@ nav{
     color: var(--orange);
     border-radius: 30%;
 }
+
+
+
+
+
+
+/* Estilo para o submenu */
+.dropdown-submenu {
+  position: relative;
+   
+}
+
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  display: none; /* ocultar por padrão */
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block; /* mostrar ao passar o mouse */
+
+}
+
+/* Opção para melhorar o visual, ajustando o z-index */
+.dropdown-menu {
+  z-index: 1050;
+}
+
+.dropdown-item {
+ 
+}
