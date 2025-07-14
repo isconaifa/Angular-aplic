@@ -44,8 +44,10 @@ nav{
 /* Opção para melhorar o visual, ajustando o z-index */
 .dropdown-menu {
   z-index: 1050;
+  font-size: small;
+  
 }
 
-.dropdown-item {
- 
+li a{
+  color: black;
 }
