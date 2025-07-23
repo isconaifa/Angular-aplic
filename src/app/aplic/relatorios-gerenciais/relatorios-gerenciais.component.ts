@@ -7,6 +7,8 @@ import { SelectListAno } from '../../models/SelectListAno';
 import { RadioButton } from 'primeng/radiobutton';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
+import { AplicService } from '../services/aplic.service';
+import { Exercicios } from '../../models/Exercicios';
 
 
 interface Consel {
@@ -43,10 +45,14 @@ interface Competencia {
   styleUrl: './relatorios-gerenciais.component.css'
 })
 export default class RelatoriosGerenciaisComponent implements OnInit {
+constructor(private aplicService: AplicService) { }
 ugs!: string;
   tipoRelatorio!: string;
 
-  public selectListAno: SelectListAno[] = [];
+ Exercicios: { exercicio: number }[] = [];
+exercicioSelecionado: { exercicio: number } | null = null;
+
+
   conselheiros: Consel[] | undefined;
   conselheiroSelecionado: Consel | undefined;
 
@@ -60,7 +66,6 @@ ugs!: string;
   TipoCargaSelecionada: TipoCarga | undefined;
 
 
-  ExercicioSelecionado: SelectListAno | undefined;
 
   Competencias: Competencia[] | undefined;
   CompetenciaSelecionada: Competencia | undefined;
@@ -81,6 +86,17 @@ ugs!: string;
     return arrayAno;
   }
   ngOnInit() {
+       this.aplicService.listarExercicios().subscribe({
+      next: (exercicios) => {
+        this.Exercicios = exercicios;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar exercícios', err);
+      }
+    });
+  
+    
+
     this.conselheiros = [
       { name: 'ANTÓNIO JOAQUIM' },
       { name: 'CAMPOS NETO' },
@@ -257,7 +273,7 @@ ugs!: string;
       { name: 'Patrimônio e Administrativo' },
       { name: 'Contratos e Convenios' },
     ];
-    this.selectListAno = this.populaSelectListAno();
+  
   }
 
 }

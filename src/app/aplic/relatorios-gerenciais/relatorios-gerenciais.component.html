@@ -4,13 +4,19 @@
 
     <div class="flex flex-row gap-7 ">
       <p-fieldset legend="Exercício:">
-        <div class="card flex justify-center">
-          <p-select [options]="selectListAno" [(ngModel)]="ExercicioSelecionado" optionLabel=anoNum
-            placeholder="Exercício" [ngModelOptions]="{standalone: true}" class="w-full md:w-56" />
-
-        </div>
-
-      </p-fieldset>
+  <div class="card flex justify-center">
+   <p-fieldset legend="Exercício:">
+  <div class="card flex justify-center">
+    <p-select 
+      [options]="Exercicios" 
+      [(ngModel)]="exercicioSelecionado" 
+      optionLabel="exercicio"
+      placeholder="Exercício" 
+      [ngModelOptions]="{standalone: true}" 
+      class="w-full md:w-56" 
+    ></p-select>
+  </div>
+</p-fieldset>
 
       <p-fieldset legend="Competência:">
 
