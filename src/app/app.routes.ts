@@ -22,6 +22,14 @@ export const routes: Routes = [
                 loadComponent: () => import('./aplic/perfil/perfil.component')
             },
             {
+                path: 'formulario-empenhos',
+                loadComponent: () => import('./tabelas/formulario-empenhos/formulario-empenhos.component')
+            },
+            {
+                path: 'resultado-empenhos',
+                loadComponent: () => import('./tabelas/resultado-empenhos/resultado-empenhos.component')
+            },
+            {
                 path: 'sin-up',
                 loadComponent: () => import('./aplic/sin-up/sin-up.component')
             },
@@ -48,14 +56,14 @@ export const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: 'home',
+                redirectTo: 'formulario-empenhos',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '**',
-        redirectTo: 'home',
+        redirectTo: 'formulario-empenhos',
         pathMatch: 'full'
     }
 ];
