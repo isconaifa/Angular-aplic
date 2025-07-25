@@ -10,7 +10,14 @@ import { Message } from 'primeng/message';
 
 @Component({
   selector: 'app-quantidades-reenvios',
-  imports: [ PanelModule, FieldsetModule, SelectModule, CommonModule, FormsModule, ButtonModule, Message],
+  imports: [ 
+    PanelModule, 
+    FieldsetModule, 
+    SelectModule, 
+    CommonModule, 
+    FormsModule, 
+    ButtonModule, 
+    Message],
   templateUrl: './quantidades-reenvios.component.html',
   styleUrl: './quantidades-reenvios.component.css'
 })

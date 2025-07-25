@@ -3,7 +3,7 @@
         <h1 class="text-secondary">Selecionar a Unidade Gestora para Auditoria</h1>
         <h6 class="fw-bold text-danger">Atenção para o exercício da relatoria</h6>
            <div class="border p-3 w-100">
-  <div class="d-flex" style="gap: 10px;"> <!-- Container flex -->
+  <div class="d-flex" style="gap: 10px;"> 
   <div class="d-flex flex-column gap-5 ">
     <button type="button" class="btn btn-outline-secondary py-3">Selecionar</button>
     <button type="button" class="btn btn-outline-danger py-3">Fechar</button>
@@ -48,11 +48,14 @@
       <!-- PARTE ESQUERDA DA PÁGINA -->
   <div class="left-part bg-gray ">
      <p-fieldset legend="Exercício para análise">
-     <div class="d-flex w-100 justify-center ">
-          <p-select [options]="selectListAno" [(ngModel)]="ExercicioSelecionado" optionLabel=anoNum
-            placeholder="Exercício" [ngModelOptions]="{standalone: true}" class="w-full md:w-56" />
-
-      </div>
+      <p-select 
+      [options]="Exercicios" 
+      [(ngModel)]="exercicioSelecionado" 
+      optionLabel="exercicio"
+      placeholder="Exercício para análise" 
+      [ngModelOptions]="{standalone: true}" 
+      class="w-full md:w-56" 
+    ></p-select>
      </p-fieldset>
       <p-panel>
      <p-fieldset legend="Informações recebidas" class="m-2">

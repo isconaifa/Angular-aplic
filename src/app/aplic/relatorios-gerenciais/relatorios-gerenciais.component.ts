@@ -94,6 +94,8 @@ exercicioSelecionado: { exercicio: number } | null = null;
         console.error('Erro ao carregar exercícios', err);
       }
     });
+
+    this.aplicService.listarMuncipios
   
     
 

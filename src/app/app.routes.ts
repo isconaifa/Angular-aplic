@@ -56,14 +56,14 @@ export const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: 'formulario-empenhos',
+                redirectTo: 'resultado-empenhos',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '**',
-        redirectTo: 'formulario-empenhos',
+        redirectTo: 'resultado-empenhos',
         pathMatch: 'full'
     }
 ];

@@ -9,6 +9,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common';
 import { Panel } from "primeng/panel";
 import { RadioButton } from 'primeng/radiobutton';
+import { AplicService } from '../services/aplic.service';
 
 
 
@@ -48,6 +49,11 @@ interface selecionartipo {
 export default class UnidadeGestoraComponent implements OnInit {
   municipios: municipio[] | undefined;
   municipioSelecionado: municipio | undefined;
+
+  constructor(private aplicService: AplicService) { }
+
+Exercicios: { exercicio: number }[] = [];
+exercicioSelecionado: { exercicio: number } | null = null;
 
 
   public selectListAno: SelectListAno[] = [];
@@ -111,6 +117,10 @@ export default class UnidadeGestoraComponent implements OnInit {
     return arrayAno;
   }
   ngOnInit(): void {
+
+
+
+    
     this.municipios = [
       { name: 'ALTO ALEGRE' },
       { name: 'ACORIZAL' },
@@ -263,6 +273,15 @@ export default class UnidadeGestoraComponent implements OnInit {
       { name: 'TIPO UNIDADE GESTORA' },
       { name: 'CONSELHEIRO' },
     ];
+this.aplicService.listarExercicios().subscribe({
+      next: (exercicios) => {
+        this.Exercicios = exercicios;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar exercícios', err);
+      }
+    });
+  
     this.selectListAno = this.populaSelectListAno();
     this.selectedCategories = [this.categories[0]];
     this.infoRecebidaSelecionadas = [this.InfoRecebidas[0]];
