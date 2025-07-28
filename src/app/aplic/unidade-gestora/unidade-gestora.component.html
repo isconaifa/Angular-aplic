@@ -1,133 +1,158 @@
 <div class="d-flex w-100">
-     <div class="p-3 w-100">
-        <h1 class="text-secondary">Selecionar a Unidade Gestora para Auditoria</h1>
-        <h6 class="fw-bold text-danger">Atenção para o exercício da relatoria</h6>
-           <div class="border p-3 w-100">
-  <div class="d-flex" style="gap: 10px;"> 
-  <div class="d-flex flex-column gap-5 ">
-    <button type="button" class="btn btn-outline-secondary py-3">Selecionar</button>
-    <button type="button" class="btn btn-outline-danger py-3">Fechar</button>
-  </div>
-  <div class="d-flex flex-column w-100 bg-gray">
-  <h3 class="font-weight-bold text-secondary">Conselheiro da UG Selecionada: <strong>xxxxx</strong></h3>
+  <div class="p-3 w-100">
+    <h1 class="text-secondary">Selecionar a Unidade Gestora para Auditoria</h1>
+    <h6 class="fw-bold text-danger">Atenção para o exercício da relatoria</h6>
+    <div class="border p-3 w-100">
+      <div class="d-flex" style="gap: 10px;">
+        <div class="d-flex flex-column gap-5 ">
+          <button type="button" class="btn btn-outline-secondary py-3">Selecionar</button>
+          <button type="button" class="btn btn-outline-danger py-3">Fechar</button>
+        </div>
+        <div class="d-flex flex-column w-100 bg-gray">
+        <h3 
+  class="font-weight-bold text-secondary"
+  *ngIf="municipioSelecionado?.conselheiro">
+  Conselheiro da UG Selecionada: 
+  <strong>{{ municipioSelecionado.conselheiro }}</strong>
+</h3>
 
-  <!-- Disposição para o select -->
-  <div class="d-flex align-items-center w-100 m-2">
-    <h3 class="mr-2 mb-0 text-secondary">Selecionar Tipo:</h3>
-    <div class="flex-fill">
+          <!-- Disposição para o select -->
+          <div class="d-flex align-items-center w-100 m-2">
+            <h3 class="mr-2 mb-0 text-secondary">Selecionar Tipo:</h3>
+            <div class="flex-fill">
       <p-select 
-        [options]="selecionarTipos"  
-        [(ngModel)]="selecionarTiposSelecionado"  
-        optionLabel="name"
-        placeholder="Tipo" 
-        [ngModelOptions]="{standalone: true}" 
-        class="w-100"
-      ></p-select>
-    </div>
-  </div>
-
-  <!-- Disposição para o input -->
-  <div class="d-flex align-items-center w-100 m-2">
-    <h3 class="mr-2 mb-0 text-secondary">Localizar o Município:</h3>
-    <div class="flex-fill">
-      <input 
-        class="form-control" 
-        type="text" 
-        pInputText 
-        [(ngModel)]="value" 
-      />
-    </div>
-    </div>
-  </div>
-</div>
-  </div>
-</div>
- </div>
-<div class="container-fluid d-flex">
-  
-      <!-- PARTE ESQUERDA DA PÁGINA -->
-  <div class="left-part bg-gray ">
-     <p-fieldset legend="Exercício para análise">
-      <p-select 
-      [options]="Exercicios" 
-      [(ngModel)]="exercicioSelecionado" 
-      optionLabel="exercicio"
-      placeholder="Exercício para análise" 
+      [options]="selecionarTipos" 
+      [(ngModel)]="selecionarTiposSelecionado" 
+      optionLabel="name" 
+      placeholder="Tipo" 
       [ngModelOptions]="{standalone: true}" 
-      class="w-full md:w-56" 
-    ></p-select>
-     </p-fieldset>
-      <p-panel>
-     <p-fieldset legend="Informações recebidas" class="m-2">
-     <div class="d-flex w-100 flex-column">
-      <div *ngFor="let informacao of InfoRecebidas" class="flex flex-column">
-            <p-checkbox [inputId]="informacao.key" name="group" [value]="informacao" [(ngModel)]="infoRecebidaSelecionadas" />
-            <label [for]="informacao.key" class="ml-2"> {{ informacao.name }} </label>
-      </div> 
+      class="w-100">
+      </p-select>
+            </div>
+          </div>
 
+          <!-- Disposição para o input -->
+          <div class="d-flex align-items-center w-100 m-2">
+            <h3 class="mr-2 mb-0 text-secondary">Localizar o Município:</h3>
+            <div class="flex-fill">
+              <input class="form-control" type="text" pInputText [(ngModel)]="value" />
+            </div>
+          </div>
+        </div>
       </div>
-     </p-fieldset>
+    </div>
+  </div>
+</div>
+<div class="container-fluid d-flex">
+
+  <!-- PARTE ESQUERDA DA PÁGINA -->
+  <div class="left-part bg-gray ">
+    <p-fieldset legend="Exercício para análise">
+    <p-select 
+  [options]="exercicios"
+  [(ngModel)]="exercicioSelecionado"
+  optionLabel="exercicio"
+  placeholder="Selecione o exercício"
+  (onChange)="buscarMunicipios()"
+  [ngModelOptions]="{standalone: true}"
+  class="w-full md:w-56">
+</p-select>
+
+    </p-fieldset>
+    <p-panel>
+      <p-fieldset legend="Informações recebidas" class="m-2">
+        <div class="d-flex w-100 flex-column">
+          <div *ngFor="let informacao of InfoRecebidas" class="flex flex-column">
+            <p-checkbox [inputId]="informacao.key" name="group" [value]="informacao"
+              [(ngModel)]="infoRecebidaSelecionadas" />
+            <label [for]="informacao.key" class="ml-2"> {{ informacao.name }} </label>
+          </div>
+
+        </div>
+      </p-fieldset>
 
       <p-fieldset legend="Escolha o tipo da carga:" class="w-56 ml-0">
         <div class="d-flex w-100 justify-center ">
-        <p-select class="ml-0" [options]="TipoCargas" [(ngModel)]="TipoCargaSelecionada" optionLabel="name"
-            placeholder="Tipo de Carga" [ngModelOptions]="{standalone: true}" />
+      <p-select 
+      [options]="tiposDeCarga"
+      [(ngModel)]="tipoDeCargaSelecionado"
+      optionLabel="tipo_de_carga"
+      placeholder="Tipo de Carga"
+      [ngModelOptions]="{standalone: true}"
+      class="w-full md:w-56">
+      </p-select>
         </div>
 
       </p-fieldset>
 
       <p-fieldset class="m-2">
-     <div class="d-flex w-100 flex-column">
-     
-      <div *ngFor="let category of categories" class="flex flex-column">
+        <div class="d-flex w-100 flex-column">
+
+          <div *ngFor="let category of categories" class="flex flex-column">
             <p-checkbox [inputId]="category.key" name="group" [value]="category" [(ngModel)]="selectedCategories" />
             <label [for]="category.key" class="ml-2"> {{ category.name }} </label>
-      </div> 
+          </div>
 
-      </div>
-     </p-fieldset>
-
-     <p-fieldset legend="ENVIO IMEDIATO:">
-      <P>Licitações: <strong>00</strong></P>
-      <P>Concursos: <strong>00</strong></P>
-      <P>Benefícios: <strong>00</strong></P>
-     </p-fieldset>
-
-
-     <p-fieldset legend="Modo de Trabalho" class="m-2">
-      <!-- Aqui vai o modo de trabalho -->
-       <div *ngFor="let mod of modos" class="field-checkbox">
-            <p-radiobutton [inputId]="mod.key" name="mod" [value]="mod" [(ngModel)]="modoSelecionado" />
-            <label [for]="mod.key" class="ml-2">{{ mod.name }}</label>
         </div>
-     </p-fieldset>
+      </p-fieldset>
 
-   </p-panel>
-    
+      <p-fieldset legend="ENVIO IMEDIATO:">
+        <P>Licitações: <strong>00</strong></P>
+        <P>Concursos: <strong>00</strong></P>
+        <P>Benefícios: <strong>00</strong></P>
+      </p-fieldset>
+
+
+      <p-fieldset legend="Modo de Trabalho" class="m-2">
+        <!-- Aqui vai o modo de trabalho -->
+        <div *ngFor="let mod of modos" class="field-checkbox">
+          <p-radiobutton [inputId]="mod.key" name="mod" [value]="mod" [(ngModel)]="modoSelecionado" />
+          <label [for]="mod.key" class="ml-2">{{ mod.name }}</label>
+        </div>
+      </p-fieldset>
+
+    </p-panel>
+
   </div>
 
   <!-- PARTE DIREITA DA PÁGINA -->
   <div class="right-part bg-gray ">
-   
+
     <p-panel class="mr-4">
-      
-    <!-- Municípios -->
-    <div class=" w-20 m-2">
-     <p-panel header="Municípios">
+
+      <!-- Municípios -->
+      <div class=" w-20 m-2">
+        <p-panel header="Municípios">
           <div class="card flex justify-center">
-            <p-select [options]="municipios" [(ngModel)]="municipioSelecionado" [ngModelOptions]="{standalone: true}"
-              optionLabel="name" placeholder="Município" class="w-full md:w-56" />
+<p-select 
+  [options]="municipios"
+  [(ngModel)]="municipioSelecionado"
+  optionLabel="municipio"
+  placeholder="Selecione o município"
+  (onChange)="buscarUnidadesGestoras()"
+  [ngModelOptions]="{standalone: true}"
+  class="w-full md:w-56">
+</p-select>
+
           </div>
-    </p-panel>
-   </div>
+        </p-panel>
+      </div>
 
-    <!-- Unidades Gestoras -->
-   <div class="w-20 m-2">
-     <p-panel header="Unidades Gestoras que enviaram informações">
+      <!-- Unidades Gestoras -->
+      <div class="w-20 m-2">
+        <p-panel header="Unidades Gestoras que enviaram informações">
+          <p-select 
+  [options]="unidadesGestoras"
+  [(ngModel)]="unidadeGestoraSelecionada"
+  optionLabel="nome"
+  placeholder="Selecione a unidade gestora"
+  [ngModelOptions]="{standalone: true}"
+  class="w-full md:w-56">
+</p-select>
 
+        </p-panel>
+      </div>
     </p-panel>
-   </div>
-    </p-panel>
-    
+
   </div>
 </div>

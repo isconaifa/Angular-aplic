@@ -86,16 +86,9 @@ exercicioSelecionado: { exercicio: number } | null = null;
     return arrayAno;
   }
   ngOnInit() {
-       this.aplicService.listarExercicios().subscribe({
-      next: (exercicios) => {
-        this.Exercicios = exercicios;
-      },
-      error: (err) => {
-        console.error('Erro ao carregar exercícios', err);
-      }
-    });
+       
 
-    this.aplicService.listarMuncipios
+
   
     
 

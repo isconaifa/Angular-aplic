@@ -3,22 +3,39 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Exercicios } from "../../models/Exercicios";
 import { Municipio } from "../../models/Municipios";
+import { UnidadeGestora } from "../../models/UnidadeGestora";
+import { TipoCarga } from "../../models/TipoCarga";
+
 
 @Injectable({ 
     providedIn: 'root' 
 })
 export class AplicService {
     
-    private BaseUrl = 'http://localhost:5000/aplic';
+    private baseUrl = 'http://localhost:5000/aplic';
     constructor(private http: HttpClient) { }
+ getExercicios(): Observable<Exercicios[]> {
+  return this.http.get<Exercicios[]>(`${this.baseUrl}/exercicios`);
+}
 
-    listarExercicios() :Observable<Exercicios[]> {
-        return this.http.get<Exercicios[]>(this.BaseUrl + '/exercicios');
-    }
+getMunicipios(anoExercicio: number): Observable<Municipio[]> {
+  return this.http.get<Municipio[]>(`${this.baseUrl}/municipios`, {
+    params: { anoExercicio }
+  });
+}
 
-  listarMuncipios(ano: number): Observable<Municipio[]> {
-    return this.http.get<Municipio[]>(`${this.BaseUrl}/municipios?anoExercicio/${ano}`);
-  }
+getUnidadesGestoras(munCodigo: number): Observable<UnidadeGestora[]> {
+  return this.http.get<UnidadeGestora[]>(`${this.baseUrl}/unidades-gestoras`, {
+    params: { mun_codigo: munCodigo }
+  });
+}
+
+getTiposDeCarga(): Observable<TipoCarga[]> {
+  return this.http.get<TipoCarga[]>(`${this.baseUrl}/tipos-de-carga`);
+}
+
+
+
 }
 
 

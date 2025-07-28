@@ -10,6 +10,12 @@ import { CommonModule } from '@angular/common';
 import { Panel } from "primeng/panel";
 import { RadioButton } from 'primeng/radiobutton';
 import { AplicService } from '../services/aplic.service';
+import { Exercicios } from '../../models/Exercicios';
+import { Municipio } from '../../models/Municipios';
+import { UnidadeGestora } from '../../models/UnidadeGestora';
+import { SelecionarTipo } from '../../models/SelecionarTipo';
+import { TipoCarga } from '../../models/TipoCarga';
+
 
 
 
@@ -17,18 +23,14 @@ import { AplicService } from '../services/aplic.service';
 interface municipio {
   name: string;
 }
-interface TipoCarga {
-  name: string;
-}
+// interface TipoCarga {
+//   name: string;
+// }
 
 interface municipio {
   name: string;
 }
 
-
-interface selecionartipo {
-  name: string;
-}
 @Component({
   selector: 'app-unidade-gestora',
   imports: [
@@ -47,20 +49,38 @@ interface selecionartipo {
   styleUrl: './unidade-gestora.component.css'
 })
 export default class UnidadeGestoraComponent implements OnInit {
-  municipios: municipio[] | undefined;
-  municipioSelecionado: municipio | undefined;
+ // municipios: municipio[] | undefined;
+  //municipioSelecionado: municipio | undefined;
+
+ exercicios: Exercicios[] = [];
+ municipios: Municipio[] = [];
+ unidadesGestoras: UnidadeGestora[] = [];
+
+ tiposDeCarga: TipoCarga[] = [];
+tipoDeCargaSelecionado!: TipoCarga;
+
+  exercicioSelecionado!: Exercicios;
+  municipioSelecionado!: Municipio;
+  unidadeGestoraSelecionada!: UnidadeGestora;
+
+ 
+ selecionarTipos: SelecionarTipo[] = [
+  { name: 'Conselheiro', value: 'conselheiro' },
+  { name: 'Município', value: 'municipio' },
+  { name: 'Unidade Julgadora', value: 'unidade_julgadora' },
+  { name: 'Tipo Unidade Gestora', value: 'tipo_unidade_gestora' }
+];
+
+selecionarTiposSelecionado!: SelecionarTipo;
 
   constructor(private aplicService: AplicService) { }
 
-Exercicios: { exercicio: number }[] = [];
-exercicioSelecionado: { exercicio: number } | null = null;
+//Exercicios: { exercicio: number }[] = [];
+//exercicioSelecionado: { exercicio: number } | null = null;
 
 
-  public selectListAno: SelectListAno[] = [];
-  ExercicioSelecionado: SelectListAno | undefined;
+ 
 
-  selecionarTipos: selecionartipo[] | undefined;
-  selecionarTiposSelecionado: selecionartipo | undefined;
 
   value: string | undefined;
 
@@ -103,195 +123,58 @@ exercicioSelecionado: { exercicio: number } | null = null;
   // Exemplo de divisão em grupos de 6
 
 
-  public populaSelectListAno(): SelectListAno[] {
-    const anoAtual = new Date().getFullYear();
-    const arrayAno: SelectListAno[] = [];
-
-    for (let i = 2008; i <= anoAtual; i++) {
-      arrayAno.push(new SelectListAno({
-        anoNum: i,
-        anoDesc: i.toString()
-      }));
-    }
-
-    return arrayAno;
-  }
-  ngOnInit(): void {
-
-
-
-    
-    this.municipios = [
-      { name: 'ALTO ALEGRE' },
-      { name: 'ACORIZAL' },
-      { name: 'AGUA BOA' },
-      { name: 'ALTA FLORESTA' },
-      { name: 'ALTO ARAGUAIA' },
-      { name: 'ALTO BOA VISTA' },
-      { name: 'ALTO GARCAS' },
-      { name: 'ALTO PARAGUAI' },
-      { name: 'ALTO TAQUARI' },
-      { name: 'APIACAS' },
-      { name: 'ARAGUAIANA' },
-      { name: 'ARAGUAINHA' },
-      { name: 'ARAPUTANGA' },
-      { name: 'ARENAPOLIS' },
-      { name: 'ARIPUANA' },
-      { name: 'BARAO DE MELGACO' },
-      { name: 'BARRA DO BUGRES' },
-      { name: 'BARRA DO GARCAS' },
-      { name: 'BOA ESPERANCA DO NORTE' },
-      { name: 'BOM JESUS DO ARAGUAIA' },
-      { name: 'BRASILIA' },
-      { name: 'BRASNORTE' },
-      { name: 'CACERES' },
-      { name: 'CAMPINAPOLIS' },
-      { name: 'CAMPO NOVO DE PARECIS' },
-      { name: 'CAMPO VERDE' },
-      { name: 'CAMPOS DE JULIO' },
-      { name: 'CANABRAVA DO NORTE' },
-      { name: 'CANARANA' },
-      { name: 'CARLINDA' },
-      { name: 'CASTANHEIRA' },
-      { name: 'CHAPADA DOS GUIMARAES' },
-      { name: 'CLAUDIA' },
-      { name: 'COCALINHO' },
-      { name: 'COLIDER' },
-      { name: 'COLNIZA' },
-      { name: 'COMODORO' },
-      { name: 'CONFRESA' },
-      { name: 'CONQUISTA DOESTE' },
-      { name: 'COTRIGUACU' },
-      { name: 'CUIABA' },
-      { name: 'CURVELANDIA' },
-      { name: 'DENISE' },
-      { name: 'DIAMANTINO' },
-      { name: 'DOM AQUINO' },
-      { name: 'FELIZ NATAL' },
-      { name: 'FIGUEIROPOLIS DOESTE' },
-      { name: 'GAUCHA DO NORTE' },
-      { name: 'GENERAL CARNEIRO' },
-      { name: 'GORIA DOESTE' },
-      { name: 'GUARANTA DO NORTE' },
-      { name: 'GUIRATINGA' },
-      { name: 'IDIAVAI' },
-      { name: 'IPIRANGA DO NORTE' },
-      { name: 'ITANHANGA' },
-      { name: 'ITAUBA' },
-      { name: 'ITIQUIRA' },
-      { name: 'JACIARA' },
-      { name: 'JANGADA' },
-      { name: 'JAURU' },
-      { name: 'JUARA' },
-      { name: 'JUINA' },
-      { name: 'JURUENA' },
-      { name: 'JUSCIMEIRA' },
-      { name: 'LAMBARI DOESTE' },
-      { name: 'LUCAS DO RIO VERDE' },
-      { name: 'LUCIARA' },
-      { name: 'MACELANDIA' },
-      { name: 'MATUPA' },
-      { name: 'MIRASSOL DOESTE' },
-      { name: 'NOBRES' },
-      { name: 'NORTELANDIA' },
-      { name: 'NOSSA SENHORA DO LIVRAMENTO' },
-      { name: 'NOVA BANDEIRANTES' },
-      { name: 'NOVA BRASILANDIA' },
-      { name: 'NOVA CANAA DO NORTE' },
-      { name: 'NOVA GUARITA' },
-      { name: 'NOVA LACERDA' },
-      { name: 'NOVA MARILANDIA' },
-      { name: 'NOVA MARINGA' },
-      { name: 'NOVA MONTE VERDE' },
-      { name: 'NOVA MUTUM' },
-      { name: 'NOVA NAZARE' },
-      { name: 'NOVA OLIMPIA' },
-      { name: 'NOVA SANTA HELENA' },
-      { name: 'NOVA UBIRATA' },
-      { name: 'NOVA XAVANTINA' },
-      { name: 'NOVO HORIZONTE DO NORTE' },
-      { name: 'NOVO MUNDO' },
-      { name: 'NOVO SANTO ANTONIO' },
-      { name: 'NOVO SAO JOAQUIM' },
-      { name: 'PARANAITA' },
-      { name: 'PEDRA PRETA' },
-      { name: 'PEIXOTO DE AZEVEDO' },
-      { name: 'PLANALTO DA SERRA' },
-      { name: 'POCONE' },
-      { name: 'PLANALTO DO ARAGUAIA' },
-      { name: 'PEDRA BRANCA' },
-      { name: 'PONTES E LACERDA' },
-      { name: 'PORTO ALEGRE DO NORTE' },
-      { name: 'PORTO DOS GAUCHOS' },
-      { name: 'PORTO ESPERIDIAO' },
-      { name: 'PORTO ESTRELA' },
-      { name: 'POXOREU' },
-      { name: 'PRIMAVERA DO LESTE' },
-      { name: 'QUERENCIA' },
-      { name: 'RESERVA DO CABACAL' },
-      { name: 'RIBEIRAO CASCALHEIRA' },
-      { name: 'RIBEIRAOZINHO' },
-      { name: 'RIO BRANCO' },
-      { name: 'RONDOLANDIA' },
-      { name: 'RONDONOPOLIS' },
-      { name: 'ROSARIO OESTE' },
-      { name: 'SALTO DO CEU' },
-      { name: 'SANTA CARMEM' },
-      { name: 'SANTA CRUZ DO XINGU' },
-      { name: 'SANTA RITA DO TRIVELATO' },
-      { name: 'SANTA TEREZINHA' },
-      { name: 'SANTO AFONSO' },
-      { name: 'SANTO ANTONIO DO LESTE' },
-      { name: 'SANTO ANTONIO DO LEVERGER' },
-      { name: 'SAO FELIX DO ARAGUAIA' },
-      { name: 'SAO JOSE DO POVO' },
-      { name: 'SAO JOSE DO RIO CLARO' },
-      { name: 'SAO JOSE DO XINGU' },
-      { name: 'SAO JOSE DOS QUATRO MARCOS' },
-      { name: 'SAO PEDRO DA CIPA' },
-      { name: 'SAPEZAL' },
-      { name: 'SERRA NOVA DOURADA' },
-      { name: 'SINOP' },
-      { name: 'SORRISO' },
-      { name: 'TABAPORA' },
-      { name: 'TANGARA DA SERRA' },
-      { name: 'TAPURAH' },
-      { name: 'TERRA NOVA DO NORTE' },
-      { name: 'TESOURO' },
-      { name: 'TORIXOREU' },
-      { name: 'UNIAO DO SUL' },
-      { name: 'VALE DE SAO DOMINGOS' },
-      { name: 'VARZEA GRANDE' },
-      { name: 'VERA' },
-      { name: 'VILA BELA DA SANTISSIMA TRINDADE' },
-      { name: 'VILA RICA' },
-
-    ];
-    this.selecionarTipos = [
-      { name: 'MUNICIPIO' },
-      { name: 'UNIDADE JULGADORA' },
-      { name: 'TIPO UNIDADE GESTORA' },
-      { name: 'CONSELHEIRO' },
-    ];
-this.aplicService.listarExercicios().subscribe({
-      next: (exercicios) => {
-        this.Exercicios = exercicios;
-      },
-      error: (err) => {
-        console.error('Erro ao carregar exercícios', err);
-      }
-    });
   
-    this.selectListAno = this.populaSelectListAno();
-    this.selectedCategories = [this.categories[0]];
-    this.infoRecebidaSelecionadas = [this.InfoRecebidas[0]];
-    this.modoSelecionado = this.modos[0];
 
-    this.TipoCargas = [
-      { name: 'Contabilidade' },
-      { name: 'Folha de Pagamento' },
-      { name: 'Contratos' },
-      { name: 'Patrimônio' },
-    ];
+ 
+  ngOnInit(): void {
+ this.aplicService.getExercicios().subscribe(data => {
+      this.exercicios = data;
+    });
+
+    this.aplicService.getTiposDeCarga().subscribe(data => {
+      this.tiposDeCarga = data;
+    });
+
+  
+  }
+
+  buscarMunicipios(): void {
+    const ano = this.exercicioSelecionado?.exercicio;
+    if (ano) {
+      this.aplicService.getMunicipios(ano).subscribe(data => {
+        this.municipios = data;
+        this.municipioSelecionado = new Municipio();
+        this.unidadesGestoras = [];
+      });
+    }
+  }
+
+  buscarUnidadesGestoras(): void {
+    const codigo = this.municipioSelecionado?.codigo;
+    if (codigo) {
+      this.aplicService.getUnidadesGestoras(codigo).subscribe(data => {
+        this.unidadesGestoras = data;
+        this.unidadeGestoraSelecionada = new UnidadeGestora();
+      });
+    }
   }
 }
+
+    /*
+    SELECT DISTINCT 
+  v.ent_codigo AS codigo,
+  v.ent_nome   AS nome,
+  c.nome_conselheiro AS conselheiro
+FROM 
+  vw_entidade_aplic v
+JOIN 
+  publico.distribuicao_relator d ON d.cnpj_cpf_cod_tce_entidade = v.ent_codigo
+JOIN 
+  controlp.conselheiro c ON d.cod_conselheiro = c.cod_conselheiro
+WHERE 
+  v.mun_codigo = '510340'
+  AND d.ano_relatoria = '2025'
+ORDER BY 
+  v.ent_nome;
+    */
+  
