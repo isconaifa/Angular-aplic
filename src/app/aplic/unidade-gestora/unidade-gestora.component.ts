@@ -13,8 +13,10 @@ import { AplicService } from '../services/aplic.service';
 import { Exercicios } from '../../models/Exercicios';
 import { Municipio } from '../../models/Municipios';
 import { UnidadeGestora } from '../../models/UnidadeGestora';
-import { SelecionarTipo } from '../../models/SelecionarTipo';
 import { TipoCarga } from '../../models/TipoCarga';
+import { SelecionarTipo } from '../../models/selecionartipo';
+import { AppStateService } from '../services/app-state.service';
+import { Empenho } from '../../models/Empenho';
 
 
 
@@ -56,6 +58,8 @@ export default class UnidadeGestoraComponent implements OnInit {
  municipios: Municipio[] = [];
  unidadesGestoras: UnidadeGestora[] = [];
 
+ empenhos: Empenho[] = [];
+
  tiposDeCarga: TipoCarga[] = [];
 tipoDeCargaSelecionado!: TipoCarga;
 
@@ -73,7 +77,10 @@ tipoDeCargaSelecionado!: TipoCarga;
 
 selecionarTiposSelecionado!: SelecionarTipo;
 
-  constructor(private aplicService: AplicService) { }
+  constructor(
+    private aplicService: AplicService,
+    private appState: AppStateService
+  ) { }
 
 //Exercicios: { exercicio: number }[] = [];
 //exercicioSelecionado: { exercicio: number } | null = null;
@@ -122,7 +129,14 @@ selecionarTiposSelecionado!: SelecionarTipo;
 
   // Exemplo de divisão em grupos de 6
 
-
+atualizarEstadoGlobal(): void {
+    if (this.exercicioSelecionado) {
+      this.appState.exercicioSelecionado = this.exercicioSelecionado.exercicio;
+    }
+    if (this.unidadeGestoraSelecionada) {
+      this.appState.unidadeGestoraSelecionada = this.unidadeGestoraSelecionada.codigo;
+    }
+  }
   
 
  
@@ -134,7 +148,8 @@ selecionarTiposSelecionado!: SelecionarTipo;
     this.aplicService.getTiposDeCarga().subscribe(data => {
       this.tiposDeCarga = data;
     });
-
+     
+    console.log(this.empenhos);
   
   }
 
@@ -150,16 +165,19 @@ selecionarTiposSelecionado!: SelecionarTipo;
   }
 
   buscarUnidadesGestoras(): void {
-    const codigo = this.municipioSelecionado?.codigo;
-    if (codigo) {
-      this.aplicService.getUnidadesGestoras(codigo).subscribe(data => {
-        this.unidadesGestoras = data;
-        this.unidadeGestoraSelecionada = new UnidadeGestora();
-      });
-    }
+  const codigo = this.municipioSelecionado?.codigo;
+  const ano = this.exercicioSelecionado?.exercicio;
+  if (codigo && ano) {
+    this.aplicService.getUnidadesGestoras(codigo, ano).subscribe(data => {
+      this.unidadesGestoras = data;
+      this.unidadeGestoraSelecionada = new UnidadeGestora();
+    });
   }
 }
 
+}
+
+ 
     /*
     SELECT DISTINCT 
   v.ent_codigo AS codigo,

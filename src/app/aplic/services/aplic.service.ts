@@ -5,6 +5,7 @@ import { Exercicios } from "../../models/Exercicios";
 import { Municipio } from "../../models/Municipios";
 import { UnidadeGestora } from "../../models/UnidadeGestora";
 import { TipoCarga } from "../../models/TipoCarga";
+import { Empenho } from "../../models/Empenho";
 
 
 @Injectable({ 
@@ -24,17 +25,29 @@ getMunicipios(anoExercicio: number): Observable<Municipio[]> {
   });
 }
 
-getUnidadesGestoras(munCodigo: number): Observable<UnidadeGestora[]> {
+getUnidadesGestoras(munCodigo: number, ano: number): Observable<UnidadeGestora[]> {
   return this.http.get<UnidadeGestora[]>(`${this.baseUrl}/unidades-gestoras`, {
-    params: { mun_codigo: munCodigo }
+    params: {
+      mun_codigo: munCodigo,
+      ano: ano
+    }
+  });
+
+}
+
+getEmpenhos(unidadeGestoraCodigo: number, ano: number): Observable<Empenho[]> {
+  return this.http.get<Empenho[]>(`${this.baseUrl}/consultas-empenhos`, {
+    params: { unidadeGestoraCodigo, ano }
   });
 }
+
+
+
+
 
 getTiposDeCarga(): Observable<TipoCarga[]> {
   return this.http.get<TipoCarga[]>(`${this.baseUrl}/tipos-de-carga`);
 }
-
-
 
 }
 

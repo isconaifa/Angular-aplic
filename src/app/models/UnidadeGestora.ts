@@ -1,4 +1,5 @@
 export class UnidadeGestora{
-    codigo?: number;
-    nome?: string;
+      codigo?: number;
+      nome?: string;
+      conselheiro?: string;
 }

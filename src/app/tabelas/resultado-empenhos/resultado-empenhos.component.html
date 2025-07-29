@@ -26,19 +26,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
+    <tr *ngFor="let emp of empenhos">
+      <td>{{ emp.empenho_data | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ emp.empenho_numero }}</td>
+      <td>{{ emp.credor }}</td>
+      <td>{{ emp.valor_empenhado | currency: 'BRL' }}</td>
+      <td>{{ emp.valor_liquidado | currency: 'BRL' }}</td>
+      <td>{{ emp.valor_pago | currency: 'BRL' }}</td>
+      <td>{{ emp.valor_pago_mais_retencao | currency: 'BRL' }}</td>
+      <td>{{ emp.valor_anulado | currency: 'BRL' }}</td>
+      <td>{{ emp.qtde_notas_fiscais }}</td>
+      <td>{{ emp.qtde_nfe }}</td>
+      <td>{{ emp.contratos }}</td>
     </tr>
   </tbody>
 </table>
