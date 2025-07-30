@@ -9,6 +9,8 @@ import { Message } from 'primeng/message';
 import { AplicService } from '../../aplic/services/aplic.service';
 import { Empenho } from '../../models/Empenho';
 import { AppStateService } from '../../aplic/services/app-state.service';
+import { combineLatest } from 'rxjs';
+
 
 
 @Component({
@@ -20,34 +22,46 @@ import { AppStateService } from '../../aplic/services/app-state.service';
       CommonModule, 
       FormsModule, 
       ButtonModule, 
-      Message
+      Message,
   ],
   templateUrl: './resultado-empenhos.component.html',
   styleUrl: './resultado-empenhos.component.css'
 })
 export default class ResultadoEmpenhosComponent implements OnInit {
-   
   empenhos: Empenho[] = [];
 
-  constructor(private aplicService: AplicService,
+  constructor(
+    private aplicService: AplicService,
     private appState: AppStateService
-  ) { }
+  ) {}
+
   ngOnInit(): void {
-   this.buscarEmpenhos();
+    combineLatest([
+      this.appState.unidadeGestoraSelecionada$,
+      this.appState.exercicioSelecionado$
+    ]).subscribe(([codigoUG, ano]) => {
+      if (codigoUG !== null && ano !== null) {
+        this.buscarEmpenhos(codigoUG, ano);
+      } else{
+        const ug = sessionStorage.getItem('unidadeGestoraSelecionada')
+        const ex = sessionStorage.getItem('exercicioSelecionado')
+        if (ug && ex) {
+          this.buscarEmpenhos(Number(ug), Number(ex));
+        }
+      }
+    });
   }
 
-  buscarEmpenhos(): void{
-    const ano = this.appState.exercicioSelecionado;
-    const unidade = this.appState.unidadeGestoraSelecionada;
-    if (ano && unidade){
-      this.aplicService.getEmpenhos(unidade, ano).subscribe(data =>{
-        this.empenhos = data;
-        console.log(this.empenhos);
-      });
-    } else{
-      console.log("Ano ou Unidade Gestora não selecionados");
-    }
-    }
+  buscarEmpenhos(codigoUG: number, ano: number): void {
+    this.aplicService.getEmpenhos(codigoUG, ano).subscribe({
+      next: dados => {
+        this.empenhos = dados;
+      },
+      error: err => {
+        console.error('Erro ao buscar empenhos', err);
+      }
+    });
   }
 
+}
 

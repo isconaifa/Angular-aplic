@@ -1,80 +1,127 @@
-<div class="d-flex" style="width: 100%;">
-<div class="flex-shrink-0" style="flex: 0 0 90%; max-width: 90%;">
+<div class="d-flex" style="width: 100%">
+  <div class="flex-shrink-0" style="flex: 0 0 90%; max-width: 90%">
     <div class="p-3 fw-bold">
-        <h1>Consulta de Empenhos</h1>
-<p><small>Clique com o botão direito do mouse sobre a tabela para mais opções</small></p>
-
+      <h1>Consulta de Empenhos</h1>
+      <p>
+        <small
+          >Clique com o botão direito do mouse sobre a tabela para mais
+          opções</small
+        >
+      </p>
     </div>
-   
-    <p-panel header="Resultado(s) da consulta">
-     
-       <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Data</th>
-      <th scope="col">Nº do Empenho</th>
-      <th scope="col">Credor</th>
-      <th scope="col">Valor Empenhado</th>
-      <th scope="col">Valor Liquidado</th>
-      <th scope="col">Valor Repetido(Liquidação)</th>
-      <th scope="col">Valor Pago</th>
-      <th scope="col">Valor Pago+Refeições</th>
-      <th scope="col">Anulado Empenho</th>
-      <th scope="col">Qtde. Notas Fiscais</th>
-      <th scope="col">Qtde.NF-e</th>
-      <th scope="col">Contratos</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let emp of empenhos">
-      <td>{{ emp.empenho_data | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ emp.empenho_numero }}</td>
-      <td>{{ emp.credor }}</td>
-      <td>{{ emp.valor_empenhado | currency: 'BRL' }}</td>
-      <td>{{ emp.valor_liquidado | currency: 'BRL' }}</td>
-      <td>{{ emp.valor_pago | currency: 'BRL' }}</td>
-      <td>{{ emp.valor_pago_mais_retencao | currency: 'BRL' }}</td>
-      <td>{{ emp.valor_anulado | currency: 'BRL' }}</td>
-      <td>{{ emp.qtde_notas_fiscais }}</td>
-      <td>{{ emp.qtde_nfe }}</td>
-      <td>{{ emp.contratos }}</td>
-    </tr>
-  </tbody>
-</table>
-    </p-panel>
-</div>
+    <div class="d-flex flex-row gap-4 justify-space-between">
+      <p-button label="Resultado(s) da Consulta" variant="outlined" />
+      <p-button label="Liquidações" variant="outlined" />
+      <p-button label="Pagamentos" variant="outlined" />
+    </div>
 
-
-<div class="flex-shrink-0" style="flex: 1 1 10%; max-width: 10%;">
-<div class="card flex justify-center m-1 text-small">
-   <p-fieldset legend="opções:" class="font-small">
-    Selecione o Exercício
-        <div class="card flex justify-center">
-         dfdjf
+    <p-panel>
+      <div class="d-flex flex-row gap-4 justify-space-between form-check">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkParams"
+          />
+          <label class="form-check-label" for="checkParams">
+            Consulta Parametrizada
+          </label>
         </div>
-      </p-fieldset>
-</div>
 
-<div class="card flex flex-wrap gap-4 justify-center m-2">
-    <p-button label="Ir para a unidade gestora" variant="text" severity="secondary" />
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkAllEmp"
+            checked
+          />
+          <label class="form-check-label" for="checkAllEmp">
+            Todos os Empenhos
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkDetailsEmp"
+          />
+          <label class="form-check-label" for="checkDetailsEmp">
+            Detalhes do Empenho
+          </label>
+        </div>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Nº do Empenho</th>
+            <th scope="col">Credor</th>
+            <th scope="col">Valor Empenhado</th>
+            <th scope="col">Valor Liquidado</th>
+            <th scope="col">Valor Pago</th>
+            <th scope="col">Valor Pago + Retenção</th>
+            <th scope="col">Anulado Empenho</th>
+            <th scope="col">Qtde. Notas Fiscais</th>
+            <th scope="col">Qtde. NF-e</th>
+            <th scope="col">Contratos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of empenhos">
+            <td>{{ emp.empenho_data | date : "dd/MM/yyyy" }}</td>
+            <td>{{ emp.empenho_numero }}</td>
+            <td>{{ emp.credor }}</td>
+            <td>{{ emp.valor_empenhado | currency : "BRL" }}</td>
+            <td>{{ emp.valor_liquidado | currency : "BRL" }}</td>
+            <td>{{ emp.valor_pago | currency : "BRL" }}</td>
+            <td>{{ emp.valor_pago_mais_retencao | currency : "BRL" }}</td>
+            <td>{{ emp.valor_anulado | currency : "BRL" }}</td>
+            <td>{{ emp.qtde_notas_fiscais }}</td>
+            <td>{{ emp.qtde_nfe }}</td>
+            <td>{{ emp.contratos }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-panel>
+  </div>
+
+  <div class="flex-shrink-0" style="flex: 1 1 10%; max-width: 10%">
+    <div class="card flex justify-center m-1 text-small">
+      
+    </div>
+
    
-</div>
 
-<div class="card flex flex-wrap gap-4 justify-center m-2 text-small">
-    <p-message severity="error">Obs: estão sendo considerados apenas os reenvios autorizados e reenviados após 31/05/2011</p-message>
+    <div class="card flex flex-wrap gap-4 justify-center m-2 text-small">
+      <p-message severity="error">
+        *As colunas 'valor Empenhado', 'valor Liquidado'e
+         'valor Pago' estão considerando as 
+         respectivas anulações
+      </p-message>
+    </div>
+     
+       <p-fieldset class="font-small">
+        <small>Consulta aos beneficiários</small>
+      </p-fieldset>
+    <div class="card flex flex-wrap gap-4 justify-center m-2">
+      <p-button label="Visualizar" variant="outlined" severity="secondary" />
+    </div>
+    
+      <div class="card flex flex-wrap gap-4 justify-center m-2">
+      <p-button label="Filtrar[F3]" variant="outlined" severity="secondary" />
+      </div>
 
-</div>
+    <div class="card flex flex-wrap gap-4 justify-center m-2">
+      <p-button label="Localizar[F4]" variant="outlined" severity="secondary" />
+    </div>
 
-<div class="card flex flex-wrap gap-4 justify-center m-2">
-    <p-button label="Filtrar[F3]" variant="outlined" severity="secondary" />
-</div>
-
-<div class="card flex flex-wrap gap-4 justify-center m-2">
-  <p-button label="Localizar[F4]" variant="outlined" severity="secondary" />
-</div>
-
-<div class="card flex flex-wrap gap-4 justify-center m-2">
-  <p-button label="Fechar[Esc]" variant="outlined" severity="secondary" />
-</div>
-</div>
+    <div class="card flex flex-wrap gap-4 justify-center m-2">
+      <p-button label="Fechar[Esc]" variant="outlined" severity="secondary" />
+    </div>
+  </div>
 </div>

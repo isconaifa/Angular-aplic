@@ -6,6 +6,7 @@ import { Municipio } from "../../models/Municipios";
 import { UnidadeGestora } from "../../models/UnidadeGestora";
 import { TipoCarga } from "../../models/TipoCarga";
 import { Empenho } from "../../models/Empenho";
+import { HttpParams } from '@angular/common/http';
 
 
 @Injectable({ 
@@ -35,10 +36,14 @@ getUnidadesGestoras(munCodigo: number, ano: number): Observable<UnidadeGestora[]
 
 }
 
+
+
 getEmpenhos(unidadeGestoraCodigo: number, ano: number): Observable<Empenho[]> {
-  return this.http.get<Empenho[]>(`${this.baseUrl}/consultas-empenhos`, {
-    params: { unidadeGestoraCodigo, ano }
-  });
+  const params = new HttpParams()
+    .set('unidadeGestoraCodigo', unidadeGestoraCodigo.toString())
+    .set('ano', ano.toString());
+
+  return this.http.get<Empenho[]>(`${this.baseUrl}/consultas-empenhos`, { params });
 }
 
 

@@ -129,14 +129,6 @@ selecionarTiposSelecionado!: SelecionarTipo;
 
   // Exemplo de divisão em grupos de 6
 
-atualizarEstadoGlobal(): void {
-    if (this.exercicioSelecionado) {
-      this.appState.exercicioSelecionado = this.exercicioSelecionado.exercicio;
-    }
-    if (this.unidadeGestoraSelecionada) {
-      this.appState.unidadeGestoraSelecionada = this.unidadeGestoraSelecionada.codigo;
-    }
-  }
   
 
  
@@ -153,6 +145,22 @@ atualizarEstadoGlobal(): void {
   
   }
 
+  onChangeExercicio() {
+    const ano = this.exercicioSelecionado?.exercicio;
+    if (ano) {
+      this.appState.setExercicioSelecionado(ano);
+    }
+
+    this.buscarMunicipios();
+  }
+
+  onChangeUnidadeGestora(){
+    const codigoUG = this.unidadeGestoraSelecionada?.codigo;
+    if (codigoUG) {
+      this.appState.setUnidadeGestoraSelecionada(codigoUG);
+    }
+  }
+
   buscarMunicipios(): void {
     const ano = this.exercicioSelecionado?.exercicio;
     if (ano) {
@@ -164,16 +172,26 @@ atualizarEstadoGlobal(): void {
     }
   }
 
-  buscarUnidadesGestoras(): void {
+buscarUnidadesGestoras(): void {
   const codigo = this.municipioSelecionado?.codigo;
   const ano = this.exercicioSelecionado?.exercicio;
   if (codigo && ano) {
     this.aplicService.getUnidadesGestoras(codigo, ano).subscribe(data => {
       this.unidadesGestoras = data;
-      this.unidadeGestoraSelecionada = new UnidadeGestora();
     });
   }
 }
+
+
+
+onUnidadeGestoraSelecionada(): void {
+  const codigoUG = this.unidadeGestoraSelecionada?.codigo;
+  if (codigoUG) {
+    this.appState.setUnidadeGestoraSelecionada(codigoUG);
+  }
+}
+
+
 
 }
 
