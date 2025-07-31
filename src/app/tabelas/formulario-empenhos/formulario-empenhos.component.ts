@@ -9,10 +9,11 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { FluidModule } from 'primeng/fluid';
 import { RadioButton } from 'primeng/radiobutton';
 import { Checkbox } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
 
 interface City {
-    name: string;
-    code: string;
+  name: string;
+  code: string;
 }
 @Component({
   selector: 'app-formulario-empenhos',
@@ -26,30 +27,32 @@ interface City {
     DatePickerModule,
     FluidModule,
     RadioButton,
-    Checkbox
+    Checkbox,
+    InputTextModule,
   ],
   templateUrl: './formulario-empenhos.component.html',
-  styleUrl: './formulario-empenhos.component.css'
+  styleUrl: './formulario-empenhos.component.css',
 })
 export default class FormularioEmpenhosComponent implements OnInit {
-   checked: boolean = false;
- cities: City[] | undefined;
+  checked: boolean = false;
+  value1: string | undefined;
+  value2: string | undefined;
+  cities: City[] | undefined;
   pizza: string[] = [];
 
-    selectedCity: City | undefined;
+  selectedCity: City | undefined;
 
-     date1: Date | undefined;
+  date1: Date | undefined;
 
-    date2: Date | undefined;
+  date2: Date | undefined;
 
-    ngOnInit() {
-        this.cities = [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' },
-            { name: 'Istanbul', code: 'IST' },
-            { name: 'Paris', code: 'PRS' }
-        ];
-    }
-
+  ngOnInit() {
+    this.cities = [
+      { name: 'New York', code: 'NY' },
+      { name: 'Rome', code: 'RM' },
+      { name: 'London', code: 'LDN' },
+      { name: 'Istanbul', code: 'IST' },
+      { name: 'Paris', code: 'PRS' },
+    ];
+  }
 }
