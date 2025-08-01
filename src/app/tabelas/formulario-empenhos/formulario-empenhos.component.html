@@ -30,16 +30,19 @@
           <p-fluid class="d-flex flex-row gap-2">
             <div class="flex-auto">
               <p-datepicker
-                [(ngModel)]="date1"
+                [(ngModel)]="data1"
+                dateFormat="dd/mm/yy"
+                [iconDisplay]="'input'"
                 [showIcon]="true"
                 inputId="buttondisplay"
                 [showOnFocus]="false"
               />
             </div>
-            <div class="flex-auto text-center align-self-center">à</div>
+            <div class="flex-auto text-center align-self-center">a</div>
             <div class="flex-auto">
               <p-datepicker
-                [(ngModel)]="date2"
+                [(ngModel)]="data2"
+                dateFormat="dd/mm/yy"
                 [iconDisplay]="'input'"
                 [showIcon]="true"
                 inputId="icondisplay"
@@ -51,7 +54,9 @@
     </div>
 
     <p-panel>
-      <div class="d-flex flex-row gap-2 align-self-center justify-content-between">
+      <div
+        class="d-flex flex-row gap-2 align-self-center justify-content-between"
+      >
         <div class="d-flex flex-row gap-2 align-self-center">
           <p-radiobutton
             [(ngModel)]="checked"
@@ -90,24 +95,289 @@
       <h4 class="mt-4">Credor</h4>
       <div class="d-flex flex-row gap-4">
         <div>
-        <input pInputText [(ngModel)]="value1" class="border-top-none" type="text"  pSize="small" placeholder="Credor"/>
+          <input
+            pInputText
+            [(ngModel)]="numCredor"
+            class="border-top-none"
+            type="text"
+            pSize="small"
+            placeholder="Credor"
+          />
         </div>
-        <div class="flex-auto text-center align-self-center"><i class="bi bi-binoculars cursor-pointer hover:border-primary"></i></div>
-        <div class="flex-auto text-center align-self-center w-100"><hr></div>
+        <div class="flex-auto text-center align-self-center">
+          <i class="bi bi-binoculars cursor-pointer hover:border-primary"></i>
+        </div>
+        <div class="flex-auto text-center align-self-center w-100"><hr /></div>
       </div>
       <div class="mt-4">
-      <h5>Descrição Empenho</h5>
-      <input type="text" class="form-control border-top-0">
+        <h5>Descrição Empenho</h5>
+        <input type="text" class="form-control border-top-0" />
       </div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div class="mt-4">
+        <h5>Órgão</h5>
+        <select
+          class="form-select form-select-lg mb-3 border-top-0"
+          aria-label="Large select example"
+        >
+          <option selected>Selecionar orgão</option>
+          <option value="1">um</option>
+          <option value="2">dois</option>
+          <option value="3">três</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <h5>Unidade Orçamentária</h5>
+        <select
+          class="form-select form-select-lg mb-3 border-top-0"
+          aria-label="Large select example"
+        >
+          <option selected>Selecionar unidade orcamentária</option>
+          <option value="1">um</option>
+          <option value="2">dois</option>
+          <option value="3">três</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row mt-4 w-100">
+        <div class="w-50">
+          <h5>Função</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar função</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+
+        <div class="w-50">
+          <h5>Subfunção</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar subfunção</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h5>Programa</h5>
+        <select
+          class="form-select form-select-lg mb-3 border-top-0"
+          aria-label="Large select example"
+        >
+          <option selected>Selecionar programa</option>
+          <option value="1">um</option>
+          <option value="2">dois</option>
+          <option value="3">três</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <h5>Ação</h5>
+        <select
+          class="form-select form-select-lg mb-3 border-top-0"
+          aria-label="Large select example"
+        >
+          <option selected>Selecionar ação</option>
+          <option value="1">um</option>
+          <option value="2">dois</option>
+          <option value="3">três</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row mt-4 w-100">
+        <div class="w-50">
+          <h5>Grupo fonte</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar grupo fonte</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+
+        <div class="w-50">
+          <h5>Fonte/Destinação de recurso(Especificação)</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar fonte</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-4">
+        <h5>Detalhe fonte</h5>
+        <select
+          class="form-select form-select-lg mb-3 border-top-0"
+          aria-label="Large select example"
+        >
+          <option selected>Selecionar detalhe</option>
+          <option value="1">um</option>
+          <option value="2">dois</option>
+          <option value="3">três</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row mt-4 w-100 gap-4">
+        <div class="w-100">
+          <h5>Dotação</h5>
+          <div class="flex-auto">
+            <p-inputmask
+              mask="9.9.99.99.99"
+              [(ngModel)]="numDotacao"
+              placeholder="_._._._._"
+            />
+          </div>
+        </div>
+
+        <div class="w-100">
+          <h5 class="d-flex justify-center">Periodo (Empenho)</h5>
+          <p-fluid class="d-flex flex-row gap-2">
+            <div class="flex-auto">
+              <p-datepicker
+                [(ngModel)]="data3"
+                dateFormat="dd/mm/yy"
+                [iconDisplay]="'input'"
+                [showIcon]="true"
+                inputId="buttondisplay"
+                [showOnFocus]="false"
+              />
+            </div>
+            <div class="flex-auto text-center align-self-center">a</div>
+            <div class="flex-auto">
+              <p-datepicker
+                [(ngModel)]="data4"
+                dateFormat="dd/mm/yy"
+                [iconDisplay]="'input'"
+                [showIcon]="true"
+                inputId="icondisplay"
+              />
+            </div>
+          </p-fluid>
+        </div>
+
+        <div class="w-100 ml-4">
+          <h5>Nº do Empenho</h5>
+          <div class="flex-auto">
+            <p-inputmask
+              mask="999999/9999"
+              [(ngModel)]="numEmpenho"
+              placeholder="______/____"
+            />
+          </div>
+        </div>
+
+        <div class="w-100">
+          <h5>
+            Valor Empenhado <strong class="text-danger">(intervalo)</strong>
+          </h5>
+          <div class="gap-2">
+            <p-inputNumber
+              inputId="currency-br"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+              [(ngModel)]="valorEmpenho1"
+            >
+            </p-inputNumber>
+           
+            <p-inputNumber
+              inputId="currency-br"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+              [(ngModel)]="valorEmpenho2"
+            >
+            </p-inputNumber>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row mt-4 w-100 gap-4">
+        <div class="d-flex flex-column w-100">
+          <h5>Nº da Licitação</h5>
+           <div class="w-100">
+            <p-inputmask
+              mask="99999999999/9999"
+              [(ngModel)]="numLicitacao"
+              placeholder="___________/____"
+            />
+          </div>
+        </div>
+        <div class="d-flex flex-column w-100">
+          <h5>Modalidade da Licitação</h5>
+          <select
+          class="form-select form-select-lg mb-3 border-top-0"
+          aria-label="Large select example"
+        >
+          <option selected>Selecionar Licitação</option>
+          <option value="1">um</option>
+          <option value="2">dois</option>
+          <option value="3">três</option>
+        </select>
+        </div>
+        <div class="d-flex flex-column w-100">
+          <h5>Nº Contrato</h5>
+          <div class="w-100">
+            <p-inputmask
+              mask="99999999999/9999"
+              [(ngModel)]="numContrato"
+              placeholder="___________/____"
+            />
+          </div>
+        </div>
+        <div class="d-flex flex-column w-100">
+          <h5>Nº Convênio</h5>
+          <div class="w-100">
+            <p-inputmask
+              mask="99999999999/9999"
+              [(ngModel)]="numConvenio"
+              placeholder="___________/____"
+            />
+          </div>
+        </div>
+        <div  class="d-flex flex-column w-100">
+          <h5 class="w-50">Nº Concurso</h5>
+          <div class="w-100">
+            <p-inputmask
+              mask="99999999999/9999"
+              [(ngModel)]="numConcurso"
+              placeholder="___________/____"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row mt-4 w-100 gap-4">
+        <div class="d-flex flex-column w-100">
+          <div><strong>Somente Liquidados</strong></div>
+          <div>c</div>
+          <div>e</div>
+        </div>
+        <div class="d-flex flex-column w-100">
+            <div><strong>Somente os Pagos</strong></div>
+            <div>dfd</div>
+            <div>cs</div>
+        </div>
+        <div class="d-flex flex-column w-100">
+            <div><strong>Somente os Anulados</strong></div>
+            <div>cs</div>
+            <div>cs</div>
+        </div>
+      </div>
       <div></div>
       <div></div>
       <div></div>

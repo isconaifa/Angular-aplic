@@ -10,6 +10,9 @@ import { FluidModule } from 'primeng/fluid';
 import { RadioButton } from 'primeng/radiobutton';
 import { Checkbox } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
+import { Fluid } from 'primeng/fluid';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputNumber } from 'primeng/inputnumber';
 
 interface City {
   name: string;
@@ -29,22 +32,43 @@ interface City {
     RadioButton,
     Checkbox,
     InputTextModule,
+    Fluid,
+    InputMaskModule,
+    InputNumber
   ],
   templateUrl: './formulario-empenhos.component.html',
   styleUrl: './formulario-empenhos.component.css',
 })
 export default class FormularioEmpenhosComponent implements OnInit {
   checked: boolean = false;
-  value1: string | undefined;
-  value2: string | undefined;
+   checkedLiquidado: boolean = false;
+  numCredor: string | undefined;
+  a: string | undefined;
+  numDotacao: string | undefined;
+  numEmpenho: string | undefined;
+  valorEmpenho1: number = 0;
+  valorEmpenho2: number = 0;
+  numLicitacao: number =0;
+  numContrato: number =0;
+  numConvenio: number =0;
+  numConcurso: number =0;
+
+
+
   cities: City[] | undefined;
   pizza: string[] = [];
 
+
+
   selectedCity: City | undefined;
 
-  date1: Date | undefined;
+  data1: Date | undefined;
 
-  date2: Date | undefined;
+  data2: Date | undefined;
+
+  data3: Date | undefined;
+
+  data4: Date | undefined;
 
   ngOnInit() {
     this.cities = [
