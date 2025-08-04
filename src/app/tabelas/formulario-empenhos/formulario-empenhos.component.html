@@ -1,410 +1,578 @@
-<div class="d-flex" style="width: 100%">
-  <div class="flex-shrink-0" style="flex: 0 0 90%; max-width: 90%">
-    <div class="p-3 bordered">
-      <p-fieldset>
-        <div class="flex flex-row gap-6">
-          <span>Parâmetros da pesquisa de empenhos Naifa</span>
-          <i class="bi bi-x justify-content-end"></i>
-        </div>
-      </p-fieldset>
+<p-card>
+  <div class="d-flex" style="width: 100%">
+    <div class="flex-shrink-0" style="flex: 0 0 90%; max-width: 90%">
+      <div class="mb-4 p-8 bordered">
+        <p-fieldset>
+          <div class="flex flex-row gap-6">
+            <span>Parâmetros da pesquisa de empenhos Naifa</span>
+            <i class="bi bi-x justify-content-end"></i>
+          </div>
+        </p-fieldset>
 
-      <p class="text-danger">
-        Dica: Para listar todos os empenhos não selecionar nenhum paramentro e
-        clicar no botão &#60;Localizar&#62;
-      </p>
-      <p-fieldset>
-        <div>
-          <p>Sugestão para Amostra</p>
-          <div class="d-flex flex-row w-100">
-            <div class="w-100 gap-4">
-              <p-select
-                [options]="cities"
-                [(ngModel)]="selectedCity"
-                optionLabel="name"
-                placeholder="Select a City"
-                [ngModelOptions]="{ standalone: true }"
+        <p class="text-danger">
+          Dica: Para listar todos os empenhos não selecionar nenhum paramentro e
+          clicar no botão &#60;Localizar&#62;
+        </p>
+        <p-fieldset>
+          <div>
+            <p>Sugestão para Amostra</p>
+            <div class="d-flex flex-row w-100">
+              <div class="w-100 gap-4">
+                <p-select
+                  [options]="cities"
+                  [(ngModel)]="selectedCity"
+                  optionLabel="name"
+                  placeholder="Select a City"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+            </div>
+            <p>Periodo (para cálculo do indicador de relevância)</p>
+            <p-fluid class="d-flex flex-row gap-2">
+              <div class="flex-auto">
+                <p-datepicker
+                  [(ngModel)]="data1"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="buttondisplay"
+                  [showOnFocus]="false"
+                />
+              </div>
+              <div class="flex-auto text-center align-self-center">a</div>
+              <div class="flex-auto">
+                <p-datepicker
+                  [(ngModel)]="data2"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="icondisplay"
+                />
+              </div>
+            </p-fluid>
+          </div>
+        </p-fieldset>
+      </div>
+
+      <p-panel>
+        <div
+          class="d-flex flex-row gap-2 align-self-center justify-content-between"
+        >
+          <div class="d-flex flex-row gap-2 align-self-center">
+            <p-radiobutton
+              [(ngModel)]="checked"
+              variant="filled"
+              value="Todos os empenhos"
+              label="empenho"
+            />
+            <strong>Todos os empenhos</strong>
+          </div>
+
+          <div
+            class="flex items-center flex-auto text-center align-self-center"
+          >
+            <p-checkbox
+              inputId="ingredient1"
+              name="pizza"
+              value="Cheese"
+              [(ngModel)]="pizza"
+            />
+            <label for="ingredient1" class="ml-2">
+              Liquidações com chaves de acesso da NF-e
+            </label>
+          </div>
+          <div class="flex items-center">
+            <p-checkbox
+              inputId="ingredient2"
+              name="pizza"
+              value="Mushroom"
+              [(ngModel)]="pizza"
+            />
+            <label for="ingredient2" class="ml-2">
+              Não pagos integralmente
+            </label>
+          </div>
+        </div>
+      </p-panel>
+      <div class="d-flex flex-column">
+        <h4 class="mt-4">Credor</h4>
+        <div class="d-flex flex-row gap-4">
+          <div>
+            <input
+              pInputText
+              [(ngModel)]="numCredor"
+              class="border-top-none"
+              type="text"
+              pSize="small"
+              placeholder="Credor"
+            />
+          </div>
+          <div class="flex-auto text-center align-self-center">
+            <button
+              type="button"
+              [routerLink]="['/pesquisa-credor']"
+              class="btn btn-secondary btn-lg"
+            >
+              <i class="bi bi-binoculars"></i>
+            </button>
+          </div>
+          <div class="flex-auto text-center align-self-center w-100">
+            <hr />
+          </div>
+        </div>
+        <div class="mt-4">
+          <h5>Descrição Empenho</h5>
+          <input type="text" class="form-control border-top-0" />
+        </div>
+        <div class="mt-4">
+          <h5>Órgão</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar orgão</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+
+        <div class="mt-4">
+          <h5>Unidade Orçamentária</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar unidade orcamentária</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+
+        <div class="d-flex flex-row mt-4 w-100">
+          <div class="w-50">
+            <h5>Função</h5>
+            <select
+              class="form-select form-select-lg mb-3 border-top-0"
+              aria-label="Large select example"
+            >
+              <option selected>Selecionar função</option>
+              <option value="1">um</option>
+              <option value="2">dois</option>
+              <option value="3">três</option>
+            </select>
+          </div>
+
+          <div class="w-50">
+            <h5>Subfunção</h5>
+            <select
+              class="form-select form-select-lg mb-3 border-top-0"
+              aria-label="Large select example"
+            >
+              <option selected>Selecionar subfunção</option>
+              <option value="1">um</option>
+              <option value="2">dois</option>
+              <option value="3">três</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5>Programa</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar programa</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+
+        <div class="mt-4">
+          <h5>Ação</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar ação</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+
+        <div class="d-flex flex-row mt-4 w-100">
+          <div class="w-50">
+            <h5>Grupo fonte</h5>
+            <select
+              class="form-select form-select-lg mb-3 border-top-0"
+              aria-label="Large select example"
+            >
+              <option selected>Selecionar grupo fonte</option>
+              <option value="1">um</option>
+              <option value="2">dois</option>
+              <option value="3">três</option>
+            </select>
+          </div>
+
+          <div class="w-50">
+            <h5>Fonte/Destinação de recurso(Especificação)</h5>
+            <select
+              class="form-select form-select-lg mb-3 border-top-0"
+              aria-label="Large select example"
+            >
+              <option selected>Selecionar fonte</option>
+              <option value="1">um</option>
+              <option value="2">dois</option>
+              <option value="3">três</option>
+            </select>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h5>Detalhe fonte</h5>
+          <select
+            class="form-select form-select-lg mb-3 border-top-0"
+            aria-label="Large select example"
+          >
+            <option selected>Selecionar detalhe</option>
+            <option value="1">um</option>
+            <option value="2">dois</option>
+            <option value="3">três</option>
+          </select>
+        </div>
+
+        <div class="d-flex flex-row mt-4 w-100 gap-4">
+          <div class="w-100">
+            <h5>Dotação</h5>
+            <div class="flex-auto">
+              <p-inputmask
+                mask="9.9.99.99.99"
+                [(ngModel)]="numDotacao"
+                placeholder="_._._._._"
               />
             </div>
           </div>
-          <p>Periodo (para cálculo do indicador de relevância)</p>
-          <p-fluid class="d-flex flex-row gap-2">
+
+          <div class="w-100">
+            <h5 class="d-flex justify-center">Periodo (Empenho)</h5>
+            <p-fluid class="d-flex flex-row gap-2">
+              <div class="flex-auto">
+                <p-datepicker
+                  [(ngModel)]="data3"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="buttondisplay"
+                  [showOnFocus]="false"
+                />
+              </div>
+              <div class="flex-auto text-center align-self-center">a</div>
+              <div class="flex-auto">
+                <p-datepicker
+                  [(ngModel)]="data4"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="icondisplay"
+                />
+              </div>
+            </p-fluid>
+          </div>
+
+          <div class="w-100 ml-4">
+            <h5>Nº do Empenho</h5>
             <div class="flex-auto">
-              <p-datepicker
-                [(ngModel)]="data1"
-                dateFormat="dd/mm/yy"
-                [iconDisplay]="'input'"
-                [showIcon]="true"
-                inputId="buttondisplay"
-                [showOnFocus]="false"
+              <p-inputmask
+                mask="999999/9999"
+                [(ngModel)]="numEmpenho"
+                placeholder="______/____"
               />
             </div>
-            <div class="flex-auto text-center align-self-center">a</div>
-            <div class="flex-auto">
-              <p-datepicker
-                [(ngModel)]="data2"
-                dateFormat="dd/mm/yy"
-                [iconDisplay]="'input'"
-                [showIcon]="true"
-                inputId="icondisplay"
-              />
+          </div>
+
+          <div class="w-100">
+            <h5>
+              Valor Empenhado <strong class="text-danger">(intervalo)</strong>
+            </h5>
+            <div class="gap-2">
+              <p-inputNumber
+                inputId="currency-br"
+                mode="currency"
+                currency="BRL"
+                locale="pt-BR"
+                [(ngModel)]="valorEmpenho1"
+              >
+              </p-inputNumber>
+
+              <p-inputNumber
+                inputId="currency-br"
+                mode="currency"
+                currency="BRL"
+                locale="pt-BR"
+                [(ngModel)]="valorEmpenho2"
+              >
+              </p-inputNumber>
             </div>
-          </p-fluid>
+          </div>
         </div>
-      </p-fieldset>
+        <div class="d-flex flex-row mt-4 w-100 gap-4">
+          <div class="d-flex flex-column w-100">
+            <h5>Nº da Licitação</h5>
+            <div class="w-100">
+              <p-inputmask
+                mask="99999999999/9999"
+                [(ngModel)]="numLicitacao"
+                placeholder="___________/____"
+              />
+            </div>
+          </div>
+          <div class="d-flex flex-column w-100">
+            <h5>Modalidade da Licitação</h5>
+            <select
+              class="form-select form-select-lg mb-3 border-top-0"
+              aria-label="Large select example"
+            >
+              <option selected>Selecionar Licitação</option>
+              <option value="1">um</option>
+              <option value="2">dois</option>
+              <option value="3">três</option>
+            </select>
+          </div>
+          <div class="d-flex flex-column w-100">
+            <h5>Nº Contrato</h5>
+            <div class="w-100">
+              <p-inputmask
+                mask="99999999999/9999"
+                [(ngModel)]="numContrato"
+                placeholder="___________/____"
+              />
+            </div>
+          </div>
+          <div class="d-flex flex-column w-100">
+            <h5>Nº Convênio</h5>
+            <div class="w-100">
+              <p-inputmask
+                mask="99999999999/9999"
+                [(ngModel)]="numConvenio"
+                placeholder="___________/____"
+              />
+            </div>
+          </div>
+          <div class="d-flex flex-column w-100">
+            <h5 class="w-50">Nº Concurso</h5>
+            <div class="w-100">
+              <p-inputmask
+                mask="99999999999/9999"
+                [(ngModel)]="numConcurso"
+                placeholder="___________/____"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-row mt-4 w-100 gap-4">
+          <div class="d-flex flex-column w-100">
+            <div>
+              <strong>
+                <p-radiobutton
+                  name="somente"
+                  value="someneteLiquidados"
+                  [(ngModel)]="somente"
+                  inputId="someneteLiquidados"
+                />
+                <label for="someneteLiquidados" class="ml-2"
+                  >Somenete Liquidados</label
+                >
+              </strong>
+            </div>
+            <div class="d-flex flex-row gap-2 m-2">
+              <div class="flex-auto text-center align-self-center">De:</div>
+              <div class="flex-auto">
+                <p-datepicker
+                  [(ngModel)]="dataLiquidado1"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="icondisplay"
+                />
+              </div>
+            </div>
+            <div class="d-flex flex-row gap-2 m-2">
+              <div class="flex-auto text-center align-self-center">Até:</div>
+              <div>
+                <p-datepicker
+                  [(ngModel)]="dataLiquidado2"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="icondisplay"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column w-100">
+            <div>
+              <strong>
+                <p-radiobutton
+                  name="somente"
+                  value="somenetePago"
+                  [(ngModel)]="somente"
+                  inputId="somenetePago"
+                />
+                <label for="someneteLiquidados" class="ml-2"
+                  >Somenete os pagos</label
+                >
+              </strong>
+            </div>
+            <div class="d-flex flex-row gap-2 m-2">
+              <div class="d-flex flex-column w-100">
+                <div>
+                  <h5>Banco</h5>
+                </div>
+                <div>
+                  <input
+                    pInputText
+                    [(ngModel)]="inputBanco"
+                    type="text"
+                    pSize="small"
+                  />
+                </div>
+                <div>
+                  <h5>Nº do Documento</h5>
+                </div>
+                <div>
+                  <input
+                    pInputText
+                    [(ngModel)]="inputNumDoc"
+                    type="text"
+                    pSize="small"
+                  />
+                </div>
+              </div>
+              <div class="d-flex flex-column w-100">
+                <div>
+                  <h5>Agencia</h5>
+                </div>
+                <div>
+                  <input
+                    pInputText
+                    [(ngModel)]="inputAgencia"
+                    type="text"
+                    pSize="small"
+                  />
+                </div>
+                <div>Periodo</div>
+                <div>
+                  <p-datepicker
+                    [(ngModel)]="datasomentePago1"
+                    dateFormat="dd/mm/yy"
+                    [iconDisplay]="'input'"
+                    [showIcon]="true"
+                    inputId="icondisplay"
+                  />
+                </div>
+              </div>
+              <div class="d-flex flex-column w-100">
+                <div>
+                  <h5>Conta Corrente</h5>
+                </div>
+                <div>
+                  <input
+                    pInputText
+                    [(ngModel)]="inputContaCorrente"
+                    type="text"
+                    pSize="small"
+                  />
+                </div>
+                <div class="d-flex flex-row gap-2 m-2">
+                  <div class="flex-auto text-center align-self-center">a</div>
+                  <div>
+                    <p-datepicker
+                      [(ngModel)]="datasomentePago2"
+                      dateFormat="dd/mm/yy"
+                      [iconDisplay]="'input'"
+                      [showIcon]="true"
+                      inputId="icondisplay"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column w-100">
+            <div>
+              <strong>
+                <p-radiobutton
+                  name="somente"
+                  value="someneteAnulados"
+                  [(ngModel)]="somente"
+                  inputId="someneteAnulados"
+                />
+                <label for="someneteLiquidados" class="ml-2"
+                  >Somente anulados</label
+                >
+              </strong>
+            </div>
+            <div class="d-flex flex-row gap-2 m-2">
+              <div class="flex-auto text-center align-self-center">De:</div>
+              <div class="flex-auto">
+                <p-datepicker
+                  [(ngModel)]="dataAnulado1"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="icondisplay"
+                />
+              </div>
+            </div>
+            <div class="d-flex flex-row gap-2 m-2">
+              <div class="flex-auto text-center align-self-center">De:</div>
+              <div class="flex-auto">
+                <p-datepicker
+                  [(ngModel)]="dataAnulado2"
+                  dateFormat="dd/mm/yy"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="icondisplay"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
 
-    <p-panel>
-      <div
-        class="d-flex flex-row gap-2 align-self-center justify-content-between"
-      >
-        <div class="d-flex flex-row gap-2 align-self-center">
-          <p-radiobutton
-            [(ngModel)]="checked"
-            variant="filled"
-            value="Todos os empenhos"
-            label="empenho"
-          />
-          <strong>Todos os empenhos</strong>
-        </div>
+    <div class="flex-shrink-0" style="flex: 1 1 10%; max-width: 10%">
+      <div class="card flex justify-center m-1 text-small"></div>
 
-        <div class="flex items-center flex-auto text-center align-self-center">
-          <p-checkbox
-            inputId="ingredient1"
-            name="pizza"
-            value="Cheese"
-            [(ngModel)]="pizza"
-          />
-          <label for="ingredient1" class="ml-2">
-            Liquidações com chaves de acesso da NF-e
-          </label>
-        </div>
-        <div class="flex items-center">
-          <p-checkbox
-            inputId="ingredient2"
-            name="pizza"
-            value="Mushroom"
-            [(ngModel)]="pizza"
-          />
-          <label for="ingredient2" class="ml-2">
-            Não pagos integralmente
-          </label>
-        </div>
-      </div>
-    </p-panel>
-    <div class="d-flex flex-column">
-      <h4 class="mt-4">Credor</h4>
-      <div class="d-flex flex-row gap-4">
-        <div>
-          <input
-            pInputText
-            [(ngModel)]="numCredor"
-            class="border-top-none"
-            type="text"
-            pSize="small"
-            placeholder="Credor"
-          />
-        </div>
-        <div class="flex-auto text-center align-self-center">
-          <i class="bi bi-binoculars cursor-pointer hover:border-primary"></i>
-        </div>
-        <div class="flex-auto text-center align-self-center w-100"><hr /></div>
-      </div>
-      <div class="mt-4">
-        <h5>Descrição Empenho</h5>
-        <input type="text" class="form-control border-top-0" />
-      </div>
-      <div class="mt-4">
-        <h5>Órgão</h5>
-        <select
-          class="form-select form-select-lg mb-3 border-top-0"
-          aria-label="Large select example"
-        >
-          <option selected>Selecionar orgão</option>
-          <option value="1">um</option>
-          <option value="2">dois</option>
-          <option value="3">três</option>
-        </select>
+      <div class="card flex flex-wrap gap-4 justify-center m-2">
+        <p-button
+          label="Ir para a unidade gestora"
+          variant="text"
+          severity="secondary"
+        />
       </div>
 
-      <div class="mt-4">
-        <h5>Unidade Orçamentária</h5>
-        <select
-          class="form-select form-select-lg mb-3 border-top-0"
-          aria-label="Large select example"
-        >
-          <option selected>Selecionar unidade orcamentária</option>
-          <option value="1">um</option>
-          <option value="2">dois</option>
-          <option value="3">três</option>
-        </select>
+      <div class="card flex flex-wrap gap-4 justify-center m-2">
+        <p-button label="Filtrar[F3]" variant="outlined" severity="secondary" />
       </div>
 
-      <div class="d-flex flex-row mt-4 w-100">
-        <div class="w-50">
-          <h5>Função</h5>
-          <select
-            class="form-select form-select-lg mb-3 border-top-0"
-            aria-label="Large select example"
-          >
-            <option selected>Selecionar função</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
-          </select>
-        </div>
-
-        <div class="w-50">
-          <h5>Subfunção</h5>
-          <select
-            class="form-select form-select-lg mb-3 border-top-0"
-            aria-label="Large select example"
-          >
-            <option selected>Selecionar subfunção</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
-          </select>
-        </div>
+      <div class="card flex flex-wrap gap-4 justify-center m-2">
+        <p-button
+          label="Localizar[F4]"
+          variant="outlined"
+          severity="secondary"
+        />
       </div>
 
-      <div class="mt-4">
-        <h5>Programa</h5>
-        <select
-          class="form-select form-select-lg mb-3 border-top-0"
-          aria-label="Large select example"
-        >
-          <option selected>Selecionar programa</option>
-          <option value="1">um</option>
-          <option value="2">dois</option>
-          <option value="3">três</option>
-        </select>
+      <div class="card flex flex-wrap gap-4 justify-center m-2">
+        <p-button label="Fechar[Esc]" variant="outlined" severity="secondary" />
       </div>
-
-      <div class="mt-4">
-        <h5>Ação</h5>
-        <select
-          class="form-select form-select-lg mb-3 border-top-0"
-          aria-label="Large select example"
-        >
-          <option selected>Selecionar ação</option>
-          <option value="1">um</option>
-          <option value="2">dois</option>
-          <option value="3">três</option>
-        </select>
-      </div>
-
-      <div class="d-flex flex-row mt-4 w-100">
-        <div class="w-50">
-          <h5>Grupo fonte</h5>
-          <select
-            class="form-select form-select-lg mb-3 border-top-0"
-            aria-label="Large select example"
-          >
-            <option selected>Selecionar grupo fonte</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
-          </select>
-        </div>
-
-        <div class="w-50">
-          <h5>Fonte/Destinação de recurso(Especificação)</h5>
-          <select
-            class="form-select form-select-lg mb-3 border-top-0"
-            aria-label="Large select example"
-          >
-            <option selected>Selecionar fonte</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
-          </select>
-        </div>
-      </div>
-      <div class="mt-4">
-        <h5>Detalhe fonte</h5>
-        <select
-          class="form-select form-select-lg mb-3 border-top-0"
-          aria-label="Large select example"
-        >
-          <option selected>Selecionar detalhe</option>
-          <option value="1">um</option>
-          <option value="2">dois</option>
-          <option value="3">três</option>
-        </select>
-      </div>
-
-      <div class="d-flex flex-row mt-4 w-100 gap-4">
-        <div class="w-100">
-          <h5>Dotação</h5>
-          <div class="flex-auto">
-            <p-inputmask
-              mask="9.9.99.99.99"
-              [(ngModel)]="numDotacao"
-              placeholder="_._._._._"
-            />
-          </div>
-        </div>
-
-        <div class="w-100">
-          <h5 class="d-flex justify-center">Periodo (Empenho)</h5>
-          <p-fluid class="d-flex flex-row gap-2">
-            <div class="flex-auto">
-              <p-datepicker
-                [(ngModel)]="data3"
-                dateFormat="dd/mm/yy"
-                [iconDisplay]="'input'"
-                [showIcon]="true"
-                inputId="buttondisplay"
-                [showOnFocus]="false"
-              />
-            </div>
-            <div class="flex-auto text-center align-self-center">a</div>
-            <div class="flex-auto">
-              <p-datepicker
-                [(ngModel)]="data4"
-                dateFormat="dd/mm/yy"
-                [iconDisplay]="'input'"
-                [showIcon]="true"
-                inputId="icondisplay"
-              />
-            </div>
-          </p-fluid>
-        </div>
-
-        <div class="w-100 ml-4">
-          <h5>Nº do Empenho</h5>
-          <div class="flex-auto">
-            <p-inputmask
-              mask="999999/9999"
-              [(ngModel)]="numEmpenho"
-              placeholder="______/____"
-            />
-          </div>
-        </div>
-
-        <div class="w-100">
-          <h5>
-            Valor Empenhado <strong class="text-danger">(intervalo)</strong>
-          </h5>
-          <div class="gap-2">
-            <p-inputNumber
-              inputId="currency-br"
-              mode="currency"
-              currency="BRL"
-              locale="pt-BR"
-              [(ngModel)]="valorEmpenho1"
-            >
-            </p-inputNumber>
-           
-            <p-inputNumber
-              inputId="currency-br"
-              mode="currency"
-              currency="BRL"
-              locale="pt-BR"
-              [(ngModel)]="valorEmpenho2"
-            >
-            </p-inputNumber>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex flex-row mt-4 w-100 gap-4">
-        <div class="d-flex flex-column w-100">
-          <h5>Nº da Licitação</h5>
-           <div class="w-100">
-            <p-inputmask
-              mask="99999999999/9999"
-              [(ngModel)]="numLicitacao"
-              placeholder="___________/____"
-            />
-          </div>
-        </div>
-        <div class="d-flex flex-column w-100">
-          <h5>Modalidade da Licitação</h5>
-          <select
-          class="form-select form-select-lg mb-3 border-top-0"
-          aria-label="Large select example"
-        >
-          <option selected>Selecionar Licitação</option>
-          <option value="1">um</option>
-          <option value="2">dois</option>
-          <option value="3">três</option>
-        </select>
-        </div>
-        <div class="d-flex flex-column w-100">
-          <h5>Nº Contrato</h5>
-          <div class="w-100">
-            <p-inputmask
-              mask="99999999999/9999"
-              [(ngModel)]="numContrato"
-              placeholder="___________/____"
-            />
-          </div>
-        </div>
-        <div class="d-flex flex-column w-100">
-          <h5>Nº Convênio</h5>
-          <div class="w-100">
-            <p-inputmask
-              mask="99999999999/9999"
-              [(ngModel)]="numConvenio"
-              placeholder="___________/____"
-            />
-          </div>
-        </div>
-        <div  class="d-flex flex-column w-100">
-          <h5 class="w-50">Nº Concurso</h5>
-          <div class="w-100">
-            <p-inputmask
-              mask="99999999999/9999"
-              [(ngModel)]="numConcurso"
-              placeholder="___________/____"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="d-flex flex-row mt-4 w-100 gap-4">
-        <div class="d-flex flex-column w-100">
-          <div><strong>Somente Liquidados</strong></div>
-          <div>c</div>
-          <div>e</div>
-        </div>
-        <div class="d-flex flex-column w-100">
-            <div><strong>Somente os Pagos</strong></div>
-            <div>dfd</div>
-            <div>cs</div>
-        </div>
-        <div class="d-flex flex-column w-100">
-            <div><strong>Somente os Anulados</strong></div>
-            <div>cs</div>
-            <div>cs</div>
-        </div>
-      </div>
-      <div></div>
-      <div></div>
-      <div></div>
     </div>
   </div>
-
-  <div class="flex-shrink-0" style="flex: 1 1 10%; max-width: 10%">
-    <div class="card flex justify-center m-1 text-small"></div>
-
-    <div class="card flex flex-wrap gap-4 justify-center m-2">
-      <p-button
-        label="Ir para a unidade gestora"
-        variant="text"
-        severity="secondary"
-      />
-    </div>
-
-    <div class="card flex flex-wrap gap-4 justify-center m-2">
-      <p-button label="Filtrar[F3]" variant="outlined" severity="secondary" />
-    </div>
-
-    <div class="card flex flex-wrap gap-4 justify-center m-2">
-      <p-button label="Localizar[F4]" variant="outlined" severity="secondary" />
-    </div>
-
-    <div class="card flex flex-wrap gap-4 justify-center m-2">
-      <p-button label="Fechar[Esc]" variant="outlined" severity="secondary" />
-    </div>
-  </div>
-</div>
+</p-card>

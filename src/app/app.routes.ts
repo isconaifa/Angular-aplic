@@ -55,6 +55,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./aplic/login/login.component')
             },
             {
+             path: 'pesquisa-credor',
+             loadComponent: () => import('./tabelas/pesquisa-credor/pesquisa-credor.component')
+            },
+            {
                 path: '',
                 redirectTo: 'formulario-empenhos',
                 pathMatch: 'full'

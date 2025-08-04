@@ -13,6 +13,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Fluid } from 'primeng/fluid';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumber } from 'primeng/inputnumber';
+import { CardModule } from 'primeng/card';
+import { RouterModule } from '@angular/router';
+
 
 interface City {
   name: string;
@@ -34,7 +37,9 @@ interface City {
     InputTextModule,
     Fluid,
     InputMaskModule,
-    InputNumber
+    InputNumber,
+    CardModule,
+    RouterModule
   ],
   templateUrl: './formulario-empenhos.component.html',
   styleUrl: './formulario-empenhos.component.css',
@@ -52,6 +57,12 @@ export default class FormularioEmpenhosComponent implements OnInit {
   numContrato: number =0;
   numConvenio: number =0;
   numConcurso: number =0;
+  somente!: string;
+
+  inputBanco: string | undefined;
+  inputNumDoc: string | undefined;
+  inputAgencia: string | undefined;
+  inputContaCorrente: string | undefined;
 
 
 
@@ -69,6 +80,14 @@ export default class FormularioEmpenhosComponent implements OnInit {
   data3: Date | undefined;
 
   data4: Date | undefined;
+  dataLiquidado1: Date | undefined;
+  dataLiquidado2: Date | undefined;
+
+  dataAnulado1: Date | undefined;
+  dataAnulado2: Date | undefined;
+
+  datasomentePago1: Date | undefined;
+  datasomentePago2: Date | undefined;
 
   ngOnInit() {
     this.cities = [
