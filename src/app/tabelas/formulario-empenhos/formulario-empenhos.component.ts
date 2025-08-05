@@ -15,6 +15,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumber } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
 import { RouterModule } from '@angular/router';
+import { Dialog } from 'primeng/dialog';
 
 
 interface City {
@@ -39,12 +40,14 @@ interface City {
     InputMaskModule,
     InputNumber,
     CardModule,
-    RouterModule
+    RouterModule,
+    Dialog
   ],
   templateUrl: './formulario-empenhos.component.html',
   styleUrl: './formulario-empenhos.component.css',
 })
 export default class FormularioEmpenhosComponent implements OnInit {
+  visible: boolean = true;
   checked: boolean = false;
    checkedLiquidado: boolean = false;
   numCredor: string | undefined;
