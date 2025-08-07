@@ -50,6 +50,12 @@ export const routes: Routes = [
                 loadComponent: () => import('./aplic/sugestoes/sugestoes.component')
 
             },
+            {path: 'liquidacoes',
+                loadComponent: () => import('./tabelas/liquidacoes/liquidacoes.component')
+            },
+             {path:'pagamentos'
+             ,loadComponent: () => import('./tabelas/pagamentos/pagamentos.component')
+             },
             {
                 path: 'login',
                 loadComponent: () => import('./aplic/login/login.component')

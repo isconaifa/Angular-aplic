@@ -1,6 +1,6 @@
 <div class="d-flex" style="width: 100%">
   <div class="flex-shrink-0" style="flex: 0 0 90%; max-width: 90%">
-    <div class="p-3 fw-bold">
+    <div *ngIf="!carregando" class="p-3 fw-bold">
       <h1>Consulta de Empenhos</h1>
       <p>
         <small
@@ -9,14 +9,22 @@
         >
       </p>
     </div>
-    <div class="d-flex flex-row gap-4 justify-space-between">
+    <div *ngIf="!carregando" class="d-flex flex-row gap-4 justify-space-between">
       <p-button label="Resultado(s) da Consulta" variant="outlined" />
-      <p-button label="Liquidações" variant="outlined" />
-      <p-button label="Pagamentos" variant="outlined" />
+      <p-button
+        label="Liquidações"
+        [routerLink]="['/liquidacoes']"
+        variant="outlined"
+      />
+      <p-button
+        label="Pagamentos"
+        [routerLink]="['/pagamentos']"
+        variant="outlined"
+      />
     </div>
 
     <p-panel>
-      <div class="d-flex flex-row gap-4 justify-space-between form-check">
+      <div *ngIf="!carregando" class="d-flex flex-row gap-4 justify-space-between form-check">
         <div class="form-check">
           <input
             class="form-check-input"
@@ -55,7 +63,21 @@
         </div>
       </div>
 
-      <table class="table table-bordered">
+      <div
+        *ngIf="carregando"
+        class="d-flex justify-content-center align-items-center"
+        style="height: 200px"
+      >
+        <p-progress-spinner
+          strokeWidth="8"
+          fill="transparent"
+          animationDuration=".5s"
+          [style]="{ width: '50px', height: '50px' }"
+        >
+        </p-progress-spinner>
+      </div>
+
+      <table *ngIf="!carregando" class="table table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col">Data</th>
@@ -91,36 +113,31 @@
   </div>
 
   <div class="flex-shrink-0" style="flex: 1 1 10%; max-width: 10%">
-    <div class="card flex justify-center m-1 text-small">
-      
-    </div>
+    <div class="card flex justify-center m-1 text-small"></div>
 
-   
-
-    <div class="card flex flex-wrap gap-4 justify-center m-2 text-small">
+    <div *ngIf="!carregando" class="card flex flex-wrap gap-4 justify-center m-2 text-small">
       <p-message severity="error">
-        *As colunas 'valor Empenhado', 'valor Liquidado'e
-         'valor Pago' estão considerando as 
-         respectivas anulações
+        *As colunas 'valor Empenhado', 'valor Liquidado'e 'valor Pago' estão
+        considerando as respectivas anulações
       </p-message>
     </div>
-     
-       <p-fieldset class="font-small">
-        <small>Consulta aos beneficiários</small>
-      </p-fieldset>
-    <div class="card flex flex-wrap gap-4 justify-center m-2">
+
+    <p-fieldset *ngIf="!carregando" class="font-small">
+      <small>Consulta aos beneficiários</small>
+    </p-fieldset>
+    <div *ngIf="!carregando" class="card flex flex-wrap gap-4 justify-center m-2">
       <p-button label="Visualizar" variant="outlined" severity="secondary" />
     </div>
-    
-      <div class="card flex flex-wrap gap-4 justify-center m-2">
-      <p-button label="Filtrar[F3]" variant="outlined" severity="secondary" />
-      </div>
 
-    <div class="card flex flex-wrap gap-4 justify-center m-2">
+    <div *ngIf="!carregando" class="card flex flex-wrap gap-4 justify-center m-2">
+      <p-button label="Filtrar[F3]" variant="outlined" severity="secondary" />
+    </div>
+
+    <div *ngIf="!carregando" class="card flex flex-wrap gap-4 justify-center m-2">
       <p-button label="Localizar[F4]" variant="outlined" severity="secondary" />
     </div>
 
-    <div class="card flex flex-wrap gap-4 justify-center m-2">
+    <div *ngIf="!carregando" class="card flex flex-wrap gap-4 justify-center m-2">
       <p-button label="Fechar[Esc]" variant="outlined" severity="secondary" />
     </div>
   </div>

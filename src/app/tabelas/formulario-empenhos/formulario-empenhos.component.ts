@@ -14,7 +14,7 @@ import { Fluid } from 'primeng/fluid';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumber } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Dialog } from 'primeng/dialog';
 
 
@@ -51,6 +51,7 @@ export default class FormularioEmpenhosComponent implements OnInit {
   checked: boolean = false;
    checkedLiquidado: boolean = false;
   numCredor: string | undefined;
+  nomeCredor: string | undefined;
   a: string | undefined;
   numDotacao: string | undefined;
   numEmpenho: string | undefined;
@@ -91,8 +92,24 @@ export default class FormularioEmpenhosComponent implements OnInit {
 
   datasomentePago1: Date | undefined;
   datasomentePago2: Date | undefined;
+ constructor(private route: ActivatedRoute) {}
+  
 
   ngOnInit() {
+       
+     this.route.queryParams.subscribe(params => {
+      const selecionados = params['selecionados'];
+      const nomeCredor = params['nomeCredor'];
+
+      if (selecionados) {
+        this.numCredor = `${selecionados} selecionados`;
+      }
+
+      if (nomeCredor) {
+        this.nomeCredor = nomeCredor;
+      }
+    });
+
     this.cities = [
       { name: 'New York', code: 'NY' },
       { name: 'Rome', code: 'RM' },

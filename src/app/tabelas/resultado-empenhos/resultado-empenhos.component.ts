@@ -6,10 +6,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { Message } from 'primeng/message';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { RouterModule } from '@angular/router';
 import { AplicService } from '../../aplic/services/aplic.service';
 import { Empenho } from '../../models/Empenho';
 import { AppStateService } from '../../aplic/services/app-state.service';
-import { combineLatest } from 'rxjs';
+import { combineLatest, finalize } from 'rxjs';
 
 
 
@@ -23,12 +25,15 @@ import { combineLatest } from 'rxjs';
       FormsModule, 
       ButtonModule, 
       Message,
+      RouterModule,
+      ProgressSpinnerModule
   ],
   templateUrl: './resultado-empenhos.component.html',
   styleUrl: './resultado-empenhos.component.css'
 })
 export default class ResultadoEmpenhosComponent implements OnInit {
   empenhos: Empenho[] = [];
+  carregando: boolean = false;
 
   constructor(
     private aplicService: AplicService,
@@ -53,11 +58,17 @@ export default class ResultadoEmpenhosComponent implements OnInit {
   }
 
   buscarEmpenhos(codigoUG: number, ano: number): void {
-    this.aplicService.getEmpenhos(codigoUG, ano).subscribe({
+    this.carregando = true;
+    this.aplicService.getEmpenhos(codigoUG, ano)
+    .pipe(
+      finalize(() => this.carregando = false) // garante que carregando = false após o observable terminar
+    )
+    .subscribe({
       next: dados => {
         this.empenhos = dados;
       },
       error: err => {
+        this.carregando = false;
         console.error('Erro ao buscar empenhos', err);
       }
     });

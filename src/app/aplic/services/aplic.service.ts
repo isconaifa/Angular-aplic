@@ -6,6 +6,7 @@ import { Municipio } from "../../models/Municipios";
 import { UnidadeGestora } from "../../models/UnidadeGestora";
 import { TipoCarga } from "../../models/TipoCarga";
 import { Empenho } from "../../models/Empenho";
+import { Credor } from "../../models/Credor";
 import { HttpParams } from '@angular/common/http';
 
 
@@ -44,6 +45,15 @@ getEmpenhos(unidadeGestoraCodigo: number, ano: number): Observable<Empenho[]> {
     .set('ano', ano.toString());
 
   return this.http.get<Empenho[]>(`${this.baseUrl}/consultas-empenhos`, { params });
+}
+
+getCredores(unidadeGestoraCodigo: number): Observable<Credor[]> {
+  return this.http.get<Credor[]>(`${this.baseUrl}/cadastro-geral`,
+    {
+    params: {
+      unidadeGestoraCodigo: unidadeGestoraCodigo
+    }
+  });
 }
 
 

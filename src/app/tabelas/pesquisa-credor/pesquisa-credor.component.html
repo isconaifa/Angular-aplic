@@ -12,52 +12,116 @@
   <div class="d-flex flex-column w-25">
     <h4>Tipo de Pesquisa</h4>
     <div>
-<select class="form-select" aria-label="Default select example">
-  <option selected>Limpar pesquisa</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Limpar pesquisa</option>
+        <option value="1">por CPF/CNPJ</option>
+        <option value="2">por CREDOR</option>
+        <option value="3">por UF</option>
+        <option value="3">por TIPO DE PESSOA</option>
+        <option value="3">por TIPO DE EMPRESA</option>
+      </select>
     </div>
   </div>
   <div class="d-flex flex-column w-25">
     <h4>Forma da Pesquisa</h4>
     <div>
-        <select class="form-select" aria-label="Default select example">
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
+      <select class="form-select" aria-label="Default select example">
+        <option value="1">Pesquisa parcial</option>
+        <option value="2">Pesquisa exata</option>
+        <option value="3">Iniciando com o texto</option>
+      </select>
     </div>
   </div>
   <div class="d-flex flex-column w-50">
     <h4>Texto a Pesquisar</h4>
     <div>
-        <input type="text" class="form-control" >
+      <input type="text" class="form-control" />
     </div>
   </div>
 </div>
- <div class="mt-4">
-    <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col" style="width: 400px;">CPF/CNPJ</th>
-      <th scope="col">CREDOR</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>654.874.456-78</td>
-      <td>mdo</td>
-    </tr>
-  </tbody>
-</table>
+
+<div
+  *ngIf="carregando"
+  class="d-flex justify-content-center align-items-center"
+  style="height: 200px"
+>
+  <p-progress-spinner
+    strokeWidth="8"
+    fill="transparent"
+    animationDuration=".5s"
+    [style]="{ width: '50px', height: '50px' }"
+  >
+  </p-progress-spinner>
+</div>
+
+<div class="mt-4 d-flex flex-row">
+  <div style="width: 30px">
+    <h3>
+      <button type="button" class="btn btn-light" (click)="showDialog()">
+        <i class="bi bi-filter-square"> </i>
+        <p-dialog header="Edit Profile" [(visible)]="visible" [style]="{ width: '20rem' }">
+    <span class="p-text-secondary block mb-8">Update your information.</span>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="username" class="font-semibold w-24">Username</label>
+        <input pInputText id="username" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+        <label for="email" class="font-semibold w-24">Email</label>
+        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex justify-end gap-2">
+       
+    </div>
+</p-dialog>
+      </button>
+    </h3>
   </div>
- 
- <div class="mt-4 w-100 d-flex justify-content-between align-items-center">
+  <table *ngIf="!carregando" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 250px">CPF/CNPJ</th>
+        <th scope="col">CREDOR</th>
+        <th scope="col" style="width: 80px">UF</th>
+        <th scope="col">MUNICIPIO</th>
+        <th scope="col">TIPO DE PESSOA</th>
+        <th scope="col">TIPO DE EMPRESA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let cred of credores"
+        style="cursor: pointer"
+        (click)="selecionarLinha(cred)"
+        [class.table-active]="cred === linhaSelecionada"
+      >
+        <td>{{ cred.cpf_cnpj }}</td>
+        <td>{{ cred.credor }}</td>
+        <td>{{ cred.uf }}</td>
+        <td>{{ cred.municipio }}</td>
+        <td>{{ cred.tipo_pessoa }}</td>
+        <td>{{ cred.tipo_empresa }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-4 w-100 d-flex justify-content-between align-items-center">
   <div class="d-flex gap-3">
-    <button type="button" class="btn btn-secondary btn-lg">Selecionar</button>
-    <button type="button" class="btn btn-secondary btn-lg">Limpar filtro</button>
+    <button
+      type="button"
+      *ngIf="!carregando"
+      class="btn btn-secondary btn-lg"
+      [routerLink]="['/formulario-empenhos']"
+      [queryParams]="{ selecionados: 1, nomeCredor: linhaSelecionada?.credor }"
+      [disabled]="!linhaSelecionada"
+    >
+      Selecionar
+    </button>
+    <button type="button" *ngIf="!carregando" class="btn btn-secondary btn-lg">
+      Limpar filtro
+    </button>
   </div>
-  <button type="button" class="btn btn-secondary btn-lg">Fechar/Limpar[Esc]</button>
+  <button type="button" *ngIf="!carregando" class="btn btn-secondary btn-lg">
+    Fechar/Limpar[Esc]
+  </button>
 </div>
