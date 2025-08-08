@@ -59,47 +59,28 @@
     <h3>
       <button type="button" class="btn btn-light" (click)="showDialog()">
         <i class="bi bi-filter-square"> </i>
-        <p-dialog header="Edit Profile" [(visible)]="visible" [style]="{ width: '20rem' }">
-    <span class="p-text-secondary block mb-8">Update your information.</span>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="username" class="font-semibold w-24">Username</label>
-        <input pInputText id="username" class="flex-auto" autocomplete="off" />
-    </div>
-    <div class="flex items-center gap-4 mb-8">
-        <label for="email" class="font-semibold w-24">Email</label>
-        <input pInputText id="email" class="flex-auto" autocomplete="off" />
-    </div>
-    <div class="flex justify-end gap-2">
-       
-    </div>
-</p-dialog>
       </button>
     </h3>
   </div>
-  <table *ngIf="!carregando" class="table table-bordered table-hover">
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col" style="width: 250px">CPF/CNPJ</th>
-        <th scope="col">CREDOR</th>
-        <th scope="col" style="width: 80px">UF</th>
-        <th scope="col">MUNICIPIO</th>
-        <th scope="col">TIPO DE PESSOA</th>
-        <th scope="col">TIPO DE EMPRESA</th>
+        <th
+          *ngFor="let col of colunasOrdenadas"
+          [style.width.px]="getLarguraColuna(col)"
+        >
+          {{ getNomeColuna(col) }}
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr
         *ngFor="let cred of credores"
         style="cursor: pointer"
-        (click)="selecionarLinha(cred)"
+        (click)="selecionarRow(cred)"
         [class.table-active]="cred === linhaSelecionada"
       >
-        <td>{{ cred.cpf_cnpj }}</td>
-        <td>{{ cred.credor }}</td>
-        <td>{{ cred.uf }}</td>
-        <td>{{ cred.municipio }}</td>
-        <td>{{ cred.tipo_pessoa }}</td>
-        <td>{{ cred.tipo_empresa }}</td>
+        <td *ngFor="let col of colunasOrdenadas">{{ cred[col] }}</td>
       </tr>
     </tbody>
   </table>
@@ -125,3 +106,19 @@
     Fechar/Limpar[Esc]
   </button>
 </div>
+
+<p-dialog
+  header="Tipo de Pesquisa"
+  [(visible)]="visible"
+  [style]="{ width: '20rem' }"
+>
+  <p-listbox
+    [(ngModel)]="PesquisaSelecionada"
+    [options]="pesquisas"
+    [multiple]="true"
+    [checkbox]="true"
+    optionLabel="name"
+    optionValue="code"
+  >
+  </p-listbox>
+</p-dialog>

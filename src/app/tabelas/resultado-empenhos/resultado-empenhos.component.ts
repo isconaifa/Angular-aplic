@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { SelectModule } from 'primeng/select';
@@ -7,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { Message } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { AplicService } from '../../aplic/services/aplic.service';
 import { Empenho } from '../../models/Empenho';
 import { AppStateService } from '../../aplic/services/app-state.service';
@@ -26,7 +27,7 @@ import { combineLatest, finalize } from 'rxjs';
       ButtonModule, 
       Message,
       RouterModule,
-      ProgressSpinnerModule
+      ProgressSpinnerModule,
   ],
   templateUrl: './resultado-empenhos.component.html',
   styleUrl: './resultado-empenhos.component.css'
@@ -35,10 +36,27 @@ export default class ResultadoEmpenhosComponent implements OnInit {
   empenhos: Empenho[] = [];
   carregando: boolean = false;
 
+
   constructor(
     private aplicService: AplicService,
-    private appState: AppStateService
+    private appState: AppStateService,
+    private router: Router
   ) {}
+
+
+
+selecionado: 'param' | 'all' = 'all';
+
+
+selecionar(valor: 'param' | 'all') {
+  this.selecionado = valor; 
+  if (valor === 'param') {
+    this.router.navigate(["/formulario-empenhos"]);
+  } // sempre seta o selecionado, não permite desmarcar
+}
+
+
+
 
   ngOnInit(): void {
     combineLatest([

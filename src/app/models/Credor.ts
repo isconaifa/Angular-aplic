@@ -5,4 +5,5 @@ export class Credor {
   municipio!: string | null;
   tipo_pessoa!: string;
   tipo_empresa!: string;
+   [key: string]: any;
 }

@@ -26,29 +26,30 @@
     <p-panel>
       <div *ngIf="!carregando" class="d-flex flex-row gap-4 justify-space-between form-check">
         <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="checkParams"
-          />
-          <label class="form-check-label" for="checkParams">
-            Consulta Parametrizada
-          </label>
-        </div>
+  <input
+    class="form-check-input"
+    type="checkbox"
+    id="checkParams"
+    [checked]="selecionado === 'param'"
+    (change)="selecionar('param')"
+  />
+  <label class="form-check-label" for="checkParams">
+    Consulta Parametrizada
+  </label>
+</div>
 
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="checkAllEmp"
-            checked
-          />
-          <label class="form-check-label" for="checkAllEmp">
-            Todos os Empenhos
-          </label>
-        </div>
+<div class="form-check">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    id="checkAllEmp"
+    [checked]="selecionado === 'all'"
+    (change)="selecionar('all')"
+  />
+  <label class="form-check-label" for="checkAllEmp">
+    Todos os Empenhos
+  </label>
+</div>
 
         <div class="form-check">
           <input
