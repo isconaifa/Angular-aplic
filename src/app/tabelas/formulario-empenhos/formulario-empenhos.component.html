@@ -14,45 +14,7 @@
           Dica: Para listar todos os empenhos não selecionar nenhum paramentro e
           clicar no botão &#60;Localizar&#62;
         </p>
-        <p-fieldset>
-          <div>
-            <p>Sugestão para Amostra</p>
-            <div class="d-flex flex-row w-100">
-              <div class="w-100 gap-4">
-                <p-select
-                  [options]="cities"
-                  [(ngModel)]="selectedCity"
-                  optionLabel="name"
-                  placeholder="Select a City"
-                  [ngModelOptions]="{ standalone: true }"
-                />
-              </div>
-            </div>
-            <p>Periodo (para cálculo do indicador de relevância)</p>
-            <p-fluid class="d-flex flex-row gap-2">
-              <div class="flex-auto">
-                <p-datepicker
-                  [(ngModel)]="data1"
-                  dateFormat="dd/mm/yy"
-                  [iconDisplay]="'input'"
-                  [showIcon]="true"
-                  inputId="buttondisplay"
-                  [showOnFocus]="false"
-                />
-              </div>
-              <div class="flex-auto text-center align-self-center">a</div>
-              <div class="flex-auto">
-                <p-datepicker
-                  [(ngModel)]="data2"
-                  dateFormat="dd/mm/yy"
-                  [iconDisplay]="'input'"
-                  [showIcon]="true"
-                  inputId="icondisplay"
-                />
-              </div>
-            </p-fluid>
-          </div>
-        </p-fieldset>
+
       </div>
 
       <p-panel>
@@ -130,11 +92,12 @@
           <select
             class="form-select form-select-lg mb-3 border-top-0"
             aria-label="Large select example"
+            [(ngModel)]="orgaoSelecionado"
+            (change)="onChangeOrgao()"
+        
           >
-            <option selected>Selecionar orgão</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
+            <option value="null" selected>Selecionar orgão</option>
+            <option *ngFor="let orgao of orgaos" [value]="orgao.orgao_codigo">{{orgao.orgao_nome}}</option>
           </select>
         </div>
 
@@ -143,11 +106,11 @@
           <select
             class="form-select form-select-lg mb-3 border-top-0"
             aria-label="Large select example"
+            [(ngModel)]="unidadeOrcamentariaSelecionada"   
           >
-            <option selected>Selecionar unidade orcamentária</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
+            <option value="null" selected>Selecionar unidade orcamentária</option>
+            <option *ngFor="let unidade of unidadeOrcamentarias" [value]="unidade.unidade_orcamentaria_codigo">{{unidade.unidade_orcamentaria}}</option>
+            
           </select>
         </div>
 
@@ -157,11 +120,15 @@
             <select
               class="form-select form-select-lg mb-3 border-top-0"
               aria-label="Large select example"
+              [(ngModel)]="funcaoSelecionada"
+              (change)="onChangeFuncao()"
             >
-              <option selected>Selecionar função</option>
-              <option value="1">um</option>
-              <option value="2">dois</option>
-              <option value="3">três</option>
+              <option value="null" selected>Selecionar função</option>
+              
+              <option *ngFor="let funcao of funcoes" [value]="funcao.codigo">{{funcao.funcao}}
+                
+              </option>
+             
             </select>
           </div>
 
@@ -171,10 +138,9 @@
               class="form-select form-select-lg mb-3 border-top-0"
               aria-label="Large select example"
             >
-              <option selected>Selecionar subfunção</option>
-              <option value="1">um</option>
-              <option value="2">dois</option>
-              <option value="3">três</option>
+              <option value="null" selected>Selecionar subfunção</option>
+              <option *ngFor="let subfuncao of subfuncoes" [value]="subfuncao.codigo">{{subfuncao.subfuncao}}</option>
+            
             </select>
           </div>
         </div>
@@ -185,10 +151,8 @@
             class="form-select form-select-lg mb-3 border-top-0"
             aria-label="Large select example"
           >
-            <option selected>Selecionar programa</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
+            <option value="null" selected>Selecionar programa</option>
+            <option *ngFor="let programa of programas" [value]="programa.programa_codigo">{{programa.programa}}</option>   
           </select>
         </div>
 
@@ -197,11 +161,11 @@
           <select
             class="form-select form-select-lg mb-3 border-top-0"
             aria-label="Large select example"
+            [(ngModel)]="acaoSelecionada"
           >
-            <option selected>Selecionar ação</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
+            <option value="null" selected>Selecionar ação</option>
+            <option *ngFor="let acao of acoes" [value]="acao.prat_numero">{{acao.acao}}</option>
+            
           </select>
         </div>
 
@@ -211,11 +175,10 @@
             <select
               class="form-select form-select-lg mb-3 border-top-0"
               aria-label="Large select example"
+              [(ngModel)]="grupoFonteSelecionado"
             >
-              <option selected>Selecionar grupo fonte</option>
-              <option value="1">um</option>
-              <option value="2">dois</option>
-              <option value="3">três</option>
+              <option value="null" selected>Selecionar grupo fonte</option>
+              <option *ngFor="let grupoFonte of grupoFontes" [value]="grupoFonte.grupo_codigo">{{grupoFonte.grupo_fonte}}</option>
             </select>
           </div>
 
@@ -224,11 +187,11 @@
             <select
               class="form-select form-select-lg mb-3 border-top-0"
               aria-label="Large select example"
+              [(ngModel)]="fonteDestinoRecursoSelecionado"
             >
-              <option selected>Selecionar fonte</option>
-              <option value="1">um</option>
-              <option value="2">dois</option>
-              <option value="3">três</option>
+              <option value="null" selected>Selecionar fonte</option>
+              <option *ngFor="let fonte of fonteDestinoRecursos" [value]="fonte.fonte_codigo">{{fonte.fonte_destinacao_recurso}}</option>
+             
             </select>
           </div>
         </div>
@@ -237,11 +200,11 @@
           <select
             class="form-select form-select-lg mb-3 border-top-0"
             aria-label="Large select example"
+            [(ngModel)]="detalheFonteSelecionado"
           >
-            <option selected>Selecionar detalhe</option>
-            <option value="1">um</option>
-            <option value="2">dois</option>
-            <option value="3">três</option>
+            <option value="null" selected>Selecionar detalhe</option>
+            <option *ngFor="let detalheFonte of detalheFontes" [value]="detalheFonte.detalhe_codigo">{{detalheFonte.detalhe_fonte}}</option>
+           
           </select>
         </div>
 
