@@ -17,6 +17,7 @@ import { FonteDestinoRecurso } from "../../models/FonteDestinoRecurso";
 import { Subfuncao } from "../../models/subfuncao";
 import { UnidadeOrcamentaria } from "../../models/UnidadeOrcamentaria";
 import { HttpParams } from '@angular/common/http';
+import { ModalidadeLicitacao } from "../../models/ModalidadeLicitacao";
 
 
 @Injectable({ 
@@ -28,6 +29,10 @@ export class AplicService {
     constructor(private http: HttpClient) { }
  getExercicios(): Observable<Exercicios[]> {
   return this.http.get<Exercicios[]>(`${this.baseUrl}/exercicios`);
+}
+
+getModalidadeLicitacao(): Observable<ModalidadeLicitacao[]> {
+  return this.http.get<ModalidadeLicitacao[]>(`${this.baseUrl}/modalidades-licitacoes`);
 }
 
 getMunicipios(anoExercicio: number): Observable<Municipio[]> {

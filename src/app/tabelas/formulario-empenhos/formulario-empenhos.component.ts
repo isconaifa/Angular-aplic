@@ -29,6 +29,7 @@ import { Acao } from '../../models/Acao';
 import { GrupoFonte } from '../../models/GrupoFonte';
 import { DetalheFonte } from '../../models/DetalheFonte';
 import { FonteDestinoRecurso } from '../../models/FonteDestinoRecurso';
+import { ModalidadeLicitacao } from '../../models/ModalidadeLicitacao';
 
 
 interface City {
@@ -100,6 +101,9 @@ export default class FormularioEmpenhosComponent implements OnInit {
  acoes:Acao[] = [];
  acaoSelecionada: number | null = null;
 
+ modalidadeLicitacoes: ModalidadeLicitacao[] = [];
+ modalidadeLicitacaoSelecionada: number | null = null;
+
  grupoFontes: GrupoFonte[] = [];
  grupoFonteSelecionado: number | null = null;
 
@@ -143,7 +147,7 @@ export default class FormularioEmpenhosComponent implements OnInit {
   
 
   ngOnInit() {
-
+  this.buscarModalidadeLicitacao();
      combineLatest([
       this.appState.unidadeGestoraSelecionada$,
       this.appState.exercicioSelecionado$,
@@ -174,8 +178,6 @@ export default class FormularioEmpenhosComponent implements OnInit {
         if (!isNaN(orgaoFinal)) {
           this.buscarUnidadeOrcamentaria(ugFinal, anoFinal, orgaoFinal);
         }
-
-
     });
        
      this.route.queryParams.subscribe(params => {
@@ -206,7 +208,7 @@ export default class FormularioEmpenhosComponent implements OnInit {
     .subscribe({
       next: funcoes => {
         this.funcoes = funcoes;
-        console.log('Funções carregadas:', this.funcoes);
+        // console.log('Funções carregadas:', this.funcoes);
       },
       error: err => {
         console.error('Erro ao buscar funções', err);
@@ -266,6 +268,17 @@ onChangeFuncao() {
       next: detalheFontes => this.detalheFontes = detalheFontes,
       error: err => console.error('Erro ao buscar detalhe fontes', err)
     });
+  }
+
+  buscarModalidadeLicitacao(): void {
+    this.aplicService.getModalidadeLicitacao().subscribe({
+      next: modalidades =>{
+        this.modalidadeLicitacoes = modalidades;
+        // console.log('Modalidades carregadas:', this.modalidadeLicitacoes);
+      } ,
+      error: err => console.error('Erro ao buscar modalidades', err)
+    });
+    
   }
 
   buscaDestinoFonteRecurso(codigoUG: number, ano: number): void {
